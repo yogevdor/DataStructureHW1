@@ -20,7 +20,8 @@ private:
     //
     // Here you may add anything you want
     //
-    
+    node *minRoom; //in rooms avltree on insert and delete, check if this pointer need to be updated
+
 public:
     // <DO-NOT-MODIFY> {
     SegmentationResort();
@@ -42,7 +43,7 @@ public:
     StatusType reheatFood();
 
     StatusType joinTables(int tableId1, int tableId2);
-                    
+
     output_t<int> joinFriend(int guestId1, int guestId2);
 
     output_t<int> cleanNextRoom();
