@@ -15,6 +15,7 @@ protected:
         int roomNum;
         int lastMeal;
         DiningRoom :: Dining_Room_Val* diningRoom = nullptr;
+        int table_index = -1;
     };
 private:
     AVLtree<Guest_Val> tree;
@@ -25,12 +26,10 @@ public:
     ~Guests_Tree() = default;
     Guests_Tree(const Guests_Tree&) = delete;            // חוסם בנאי העתקה
     Guests_Tree& operator=(const Guests_Tree&) = delete; // חוסם אופרטור השמה
-    DiningRoom :: Dining_Room_Val* get_diningRoom(int guestId);
-    int get_lastMeal(int guestId);
     StatusType checkIn(int guestId, int roomNum);
     StatusType checkOut(int guestId);
-    StatusType enterDiningRoom(int guestId, int tableId, DiningRoom& dining_room);
-    StatusType leaveDiningRoom(int guestId, int tableId);
+    output_t<int> joinFriend(int guestId1, int guestId2, DiningRoom& dining_room);
+    //StatusType enterDiningRoom(int guestId, int tableId, DiningRoom& dining_room);
 
 };
 

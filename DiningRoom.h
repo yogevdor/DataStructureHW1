@@ -28,11 +28,10 @@ public:
     DiningRoom& operator=(const DiningRoom&) = delete; // חוסם אופרטור השמה
     StatusType addTable(int tableId, int capacity);
     StatusType removeTable(int tableId);
-    //StatusType enterDiningRoom(int guestId, int tableId, Guests_Tree& guests);
+    StatusType enterDiningRoom(int guestId, int tableId, Guests_Tree& guests);
     StatusType leaveDiningRoom(int guestId, int tableId);
     StatusType reheatFood();
     StatusType joinTables(int tableId1, int tableId2);
-    output_t<int> joinFriend(int guestId1, int guestId2);
     int getLastMeal() const;
 
 };

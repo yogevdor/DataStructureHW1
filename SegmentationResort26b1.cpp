@@ -3,6 +3,8 @@
 
 #include "SegmentationResort26b1.h"
 
+#include "Rooms_Tree.h"
+
 
 SegmentationResort::SegmentationResort() //DOR
 {
@@ -36,30 +38,30 @@ StatusType SegmentationResort::removeTable(int tableId) //DOR
 
 StatusType SegmentationResort::enterDiningRoom(int guestId, int tableId)
 {
-    return StatusType::FAILURE;
+    return this->dining_room->enterDiningRoom(guestId, tableId, *(this->guests));
 }
 
 StatusType SegmentationResort::leaveDiningRoom(int guestId, int tableId)
 {
-    return StatusType::FAILURE;
+    return this->dining_room->leaveDiningRoom(guestId, tableId);
 }
 
 StatusType SegmentationResort::reheatFood()
 {
-    return StatusType::FAILURE;
+    return this->dining_room->reheatFood();
 }
 
 StatusType SegmentationResort::joinTables(int tableId1, int tableId2)
 {
-    return StatusType::FAILURE;
+    return this->dining_room->joinTables(tableId1, tableId2);
 }
 
 output_t<int> SegmentationResort::joinFriend(int guestId1, int guestId2)
 {
-    return 0;
+    return this->guests->joinFriend(guestId1, guestId2, *(this->dining_room));
 }
 
 output_t<int> SegmentationResort::cleanNextRoom()
 {
-    return 0;
+    return this->rooms->cleanNextRoom();
 }

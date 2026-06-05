@@ -15,9 +15,13 @@
 
 #include "wet1util.h"
 #include "AVLtree.h"
+#include "DiningRoom.h"
 
 class SegmentationResort {
 private:
+    DiningRoom* dining_room;
+    Guests_Tree* guests;
+    Rooms_Tree* rooms;
 
     //node* minRoom; //in rooms avltree on insert and delete, check if this pointer need to be updated
 

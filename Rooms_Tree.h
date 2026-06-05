@@ -11,8 +11,8 @@
 class Rooms_Tree {
 private:
     AVLtree<int> tree;
-    AVLtree<int>::node* cleaningStaff;
-    AVLtree<int>::node* minRoom;
+    AVLtree<int>::node* cleaningStaff = nullptr;
+    AVLtree<int>::node* minRoom = nullptr;
 
 
 public:
