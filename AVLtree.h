@@ -14,21 +14,22 @@ protected:
         node* rightSon;
         node* parent;
     };
-
+    int num_node; //total nodes
     node* root;
 
 public:
     AVLtree(); //DOR
 
     ~AVLtree(); //DOR
-
+    AVLtree(const AVLtree&) = delete;            // חוסם בנאי העתקה
+    AVLtree& operator=(const AVLtree&) = delete; // חוסם אופרטור השמה
     //insert new key and value,if key exists does nothing, keeps balance
-    void insert(int key, T value); //DOR
+    void insert(int key, T value); //DOR, update total
 
     //remove key and val, keeps balance
     void remove(int key, T value); //DOR
 
-    //find key and return value
+    //find key and return value, if not return nullptr!
     T* find(int key); //DOR
 
     //search if key exists (will use find)
@@ -37,6 +38,7 @@ public:
     //return pointer to the value with min key
     T* getMin(); //DOR
 
+    int getNumNodes();//Yaara
     //make an empty tree
     void clearTree(); //DOR
 

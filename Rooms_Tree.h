@@ -18,6 +18,8 @@ private:
 public:
     Rooms_Tree() = default;
     ~Rooms_Tree() = default;
+    Rooms_Tree(const Rooms_Tree&) = delete;            // חוסם בנאי העתקה
+    Rooms_Tree& operator=(const Rooms_Tree&) = delete; // חוסם אופרטור השמה
     StatusType insert(int guestId,int roomNum);
     output_t<int> cleanNextRoom();
     StatusType checkOut(int guestId);

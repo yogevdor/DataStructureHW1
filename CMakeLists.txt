@@ -14,6 +14,6 @@ add_executable(DataStructureHW1
         Guests_Tree.h
         Rooms_Tree.h
         Rooms_Tree.cpp
-        DiningRoom_tree.h
-        DiningRoom_Tree.cpp
+        DiningRoom.h
+        DiningRoom.cpp
         Guests_Tree.cpp)

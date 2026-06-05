@@ -10,11 +10,11 @@
 
 class Guests_Tree;
 
-class DiningRoom_Tree {
+class DiningRoom {
     friend class :: Guests_Tree;
 protected:
     struct Dining_Room_Val{
-        AVLtree<Guests_Tree::Gueste_Val*> guestsTree;
+        AVLtree<Guests_Tree::Guest_Val*> guestsTree;
         int capacity;
     };
 private:
@@ -22,15 +22,18 @@ private:
     int mealCount;
 
 public:
-    DiningRoom_Tree() = default;
-    ~DiningRoom_Tree() = default;
+    DiningRoom() = default;
+    ~DiningRoom() = default;
+    DiningRoom(const DiningRoom&) = delete;            // חוסם בנאי העתקה
+    DiningRoom& operator=(const DiningRoom&) = delete; // חוסם אופרטור השמה
     StatusType addTable(int tableId, int capacity);
     StatusType removeTable(int tableId);
-    StatusType enterDiningRoom(int guestId, int tableId);
+    //StatusType enterDiningRoom(int guestId, int tableId, Guests_Tree& guests);
     StatusType leaveDiningRoom(int guestId, int tableId);
     StatusType reheatFood();
     StatusType joinTables(int tableId1, int tableId2);
     output_t<int> joinFriend(int guestId1, int guestId2);
+    int getLastMeal() const;
 
 };
 
