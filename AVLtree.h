@@ -98,8 +98,52 @@ public:
 private:
     node* rotateRL(node* v); //DOR
     node* rotateRR(node* v); //DOR
-    node* rotateLR(node* v); //YAARA
-    node* rotateLL(node* v); //YAARA
+    node* rotateLR(node* v) {//YAARA
+        v->leftSon = rotateRR(v->leftSon);
+        return rotateLL(v);
+    }
+    node* rotateLL(node* v) {//YAARA
+        node* original_parent = v->parent;
+        node* c = v->leftSon->rightSon;
+        node* b = v->leftSon;
+        b->rightSon = v;
+        v->leftSon = c;
+        if(c != nullptr)
+            c->parent = v;
+        v->parent = b;
+        b->parent = original_parent;
+        int v_left_height;
+        if (c != nullptr) {
+            v_left_height = c->height;
+        } else {
+            v_left_height = -1;
+        }
+        int v_right_height;
+        if (v->rightSon != nullptr) {
+            v_right_height = v->rightSon->height;
+        } else {
+            v_right_height = -1;
+        }
+        if (v_left_height > v_right_height) {
+            v->height = 1 + v_left_height;
+        } else {
+            v->height = 1 + v_right_height;
+        }
+
+        int b_left_height;
+        if (b->leftSon != nullptr) {
+            b_left_height = b->leftSon->height;
+        } else {
+            b_left_height = -1;
+        }
+
+        if (b_left_height > v->height) {
+            b->height = 1 + b_left_height;
+        } else {
+            b->height = 1 + v->height;
+        }
+        return b;
+    }
     node* fill_from_arr(node** newTree_arr, int start, int end, node* parent) {
         if (start > end) {
             return nullptr;
