@@ -14,13 +14,12 @@
 #define SegmentationResort26SPRING_H_
 
 #include "wet1util.h"
+#include "AVLtree.h"
 
 class SegmentationResort {
 private:
-    //
-    // Here you may add anything you want
-    //
-    node *minRoom; //in rooms avltree on insert and delete, check if this pointer need to be updated
+
+    //node* minRoom; //in rooms avltree on insert and delete, check if this pointer need to be updated
 
 public:
     // <DO-NOT-MODIFY> {

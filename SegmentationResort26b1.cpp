@@ -4,32 +4,32 @@
 #include "SegmentationResort26b1.h"
 
 
-SegmentationResort::SegmentationResort()
+SegmentationResort::SegmentationResort() //DOR
 {
     
 }
 
-SegmentationResort::~SegmentationResort()
+SegmentationResort::~SegmentationResort() //DOR
 {
     
 }
 
-StatusType SegmentationResort::checkIn(int geustId, int roomNum)
+StatusType SegmentationResort::checkIn(int geustId, int roomNum) //DOR
 {
     return StatusType::FAILURE;
 }
 
-StatusType SegmentationResort::checkOut(int geustId)
+StatusType SegmentationResort::checkOut(int geustId) //DOR
 {
     return StatusType::FAILURE;
 }
 
-StatusType SegmentationResort::addTable(int tableId, int capacity)
+StatusType SegmentationResort::addTable(int tableId, int capacity) //DOR
 {
     return StatusType::FAILURE;
 }
 
-StatusType SegmentationResort::removeTable(int tableId)
+StatusType SegmentationResort::removeTable(int tableId) //DOR
 {
     return StatusType::FAILURE;
 }
