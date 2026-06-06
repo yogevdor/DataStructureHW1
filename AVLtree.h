@@ -8,21 +8,23 @@ class AVLtree {
 
 protected:
     struct node {
-        int key;
-        int height;
+        int key = 0;
+        int height = 0;
         T value;
-        node* leftSon;
-        node* rightSon;
-        node* parent;
+        node* leftSon = nullptr;
+        node* rightSon = nullptr;
+        node* parent = nullptr;
     };
 
-    int num_node; //total nodes
-    node* root;
+    int num_node = 0; //total nodes
+    node* root = nullptr;
 
 public:
-    AVLtree(); //DOR
+    AVLtree() = default; //DOR
 
-    ~AVLtree(); //DOR
+    ~AVLtree() {
+        this->clearTree(root);
+    }
 
     AVLtree(const AVLtree &) = delete; // חוסם בנאי העתקה
 
@@ -40,7 +42,6 @@ public:
         return *this;
     }
 
-    //insert new key and value,if key exists does nothing, keeps balance
     void insert(int key, T value) {
         if (find(key) != nullptr) {
             return;
@@ -48,10 +49,6 @@ public:
         node* newNode = new node();
         newNode->key = key;
         newNode->value = value;
-        newNode->height = 0;
-        newNode->leftSon = nullptr;
-        newNode->rightSon = nullptr;
-        newNode->parent = nullptr;
         if (root == nullptr) {
             root = newNode;
             num_node++;
@@ -102,12 +99,11 @@ public:
             }
             temp = temp->parent;
         }
-    } //DOR, update total
+    }
 
     //remove key and val, keeps balance
     void remove(int key/*, T value*/); //DOR
 
-    //find key and return value, if not return nullptr!
     T* find(int key) const {
         if (root == nullptr) {
             return nullptr;
@@ -126,7 +122,6 @@ public:
         return nullptr;
     }
 
-    //search if key exists (will use find)
     bool contains(int key) const {
         return find(key) != nullptr;
     }
@@ -134,10 +129,9 @@ public:
     //return pointer to the value with min key
     T* getMin(); //DOR
 
-    int getNumNodes(); //Yaara
-
-    //make an empty tree
-    void clearTree(); //DOR
+    int getNumNodes() {
+        return num_node;
+    }
 
     static AVLtree<T>* mergeTrees(AVLtree<T>* tree1, AVLtree<T>* tree2) {
         int size1 = tree1->num_node;
@@ -175,6 +169,15 @@ public:
     }
 
 private:
+    void clearTree(node* node) {
+        if (node == nullptr) {
+            return;
+        }
+        clearTree(node->leftSon);
+        clearTree(node->rightSon);
+        delete node;
+    }
+
     node* rotateRL(node* v); //DOR
 
     node* rotateRR(node* v); //DOR
@@ -339,7 +342,7 @@ private:
         }
     }
 
-    int getHeight(node* node) const {
+    int getHeight(node* node) {
         if (node == nullptr) {
             return -1;
         }
