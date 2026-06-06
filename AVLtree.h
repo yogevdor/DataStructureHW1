@@ -51,7 +51,7 @@ public:
     void remove(int key/*, T value*/); //DOR
 
     //find key and return value, if not return nullptr!
-    T* find(int key) {
+    T* find(int key) const {
         if (root == nullptr) {
             return nullptr;
         }
@@ -70,7 +70,9 @@ public:
     }
 
     //search if key exists (will use find)
-    bool contains(int key); //DOOR
+    bool contains(int key) const {
+        return find(key) != nullptr;
+    }
 
     //return pointer to the value with min key
     T* getMin(); //DOR
