@@ -41,13 +41,33 @@ public:
     }
 
     //insert new key and value,if key exists does nothing, keeps balance
-    void insert(int key, T value); //DOR, update total
+    void insert(int key, T value) {
+        if (!find(key)) {
+            return;
+        }
+    } //DOR, update total
 
     //remove key and val, keeps balance
     void remove(int key/*, T value*/); //DOR
 
     //find key and return value, if not return nullptr!
-    T* find(int key); //DOR
+    T* find(int key) {
+        if (root == nullptr) {
+            return nullptr;
+        }
+        node* current = root;
+        while (current) {
+            if (current->key == key) {
+                return &current->value;
+            }
+            if (current->key > key) {
+                current = current->leftSon;
+            } else {
+                current = current->rightSon;
+            }
+        }
+        return nullptr;
+    }
 
     //search if key exists (will use find)
     bool contains(int key); //DOOR
