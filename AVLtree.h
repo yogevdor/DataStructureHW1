@@ -20,7 +20,7 @@ protected:
     node* root = nullptr;
 
 public:
-    AVLtree() = default; //DOR
+    AVLtree() = default;
 
     ~AVLtree() {
         this->clearTree(root);
@@ -43,7 +43,7 @@ public:
     }
 
     void insert(int key, T value) {
-        if (find(key) != nullptr) {
+        if (contains(key)) {
             return;
         }
         node* newNode = new node();
@@ -101,8 +101,11 @@ public:
         }
     }
 
-    //remove key and val, keeps balance
-    void remove(int key/*, T value*/); //DOR
+    void remove(int key) {
+        if (contains(key)) {
+            return;
+        }
+    }
 
     T* find(int key) const {
         if (root == nullptr) {
