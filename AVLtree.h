@@ -80,7 +80,13 @@ public:
         num_node++;
         node* temp = newNode->parent;
         while (temp != nullptr) {
-            temp->height = 1 + getHeight(temp);
+            int leftHeight = getHeight(temp->leftSon);
+            int rightHeight = getHeight(temp->rightSon);
+            if (leftHeight >= rightHeight) {
+                temp->height = 1 + leftHeight;
+            } else {
+                temp->height = 1 + rightHeight;
+            }
             int bf = getBF(temp);
             if (bf > 1 || bf < -1) {
                 if (bf > 1) {
@@ -102,8 +108,67 @@ public:
     }
 
     void remove(int key) {
-        if (contains(key)) {
+        node* toRemove = find(key);
+        if (!toRemove) {
             return;
+        }
+        if (toRemove->leftSon != nullptr && toRemove->rightSon != nullptr) {
+            node* successor = toRemove->rightSon;
+            while (successor->leftSon != nullptr) {
+                successor = successor->leftSon;
+            }
+            toRemove->key = successor->key;
+            toRemove->value = successor->value;
+            toRemove = successor;
+        }
+
+        node* temp = toRemove->parent;
+        node* child;
+        if (toRemove->leftSon != nullptr) {
+            child = toRemove->leftSon;
+        } else {
+            child = toRemove->rightSon;
+        }
+        if (temp == nullptr) {
+            root = child;
+        } else {
+            if (temp->leftSon == toRemove) {
+                temp->leftSon = child;
+            } else {
+                temp->rightSon = child;
+            }
+        }
+        if (child != nullptr) {
+            child->parent = toRemove->parent;
+        }
+        delete toRemove;
+        num_node--;
+
+        while (temp != nullptr) {
+            int leftHeight = getHeight(temp->leftSon);
+            int rightHeight = getHeight(temp->rightSon);
+            if (leftHeight >= rightHeight) {
+                temp->height = 1 + leftHeight;
+            } else {
+                temp->height = 1 + rightHeight;
+            }
+            int bf = getBF(temp);
+            if (bf > 1 || bf < -1) {
+                if (bf > 1) {
+                    if (getBF(temp->leftSon) >= 0) {
+                        temp = rotateLL(temp);
+                    } else {
+                        temp = rotateLR(temp);
+                    }
+                } else {
+                    if (getBF(temp->rightSon) <= 0) {
+                        temp = rotateRR(temp);
+                    } else {
+                        temp = rotateRL(temp);
+                    }
+                }
+            }
+            temp = temp->parent;
         }
     }
 
@@ -130,9 +195,9 @@ public:
     }
 
     //return pointer to the value with min key
-    T* getMin(); //DOR
+    //T* getMin(); //DOR
 
-    int getNumNodes() {
+    int getNumNodes() const {
         return num_node;
     }
 
@@ -345,21 +410,11 @@ private:
         }
     }
 
-    int getHeight(node* node) {
+    int getHeight(node* node) const {
         if (node == nullptr) {
             return -1;
         }
-        int leftHeight = -1,rightHeight = -1;
-        if (node->leftSon != nullptr) {
-            leftHeight = node->leftSon->height;
-        }
-        if (node->rightSon != nullptr) {
-            rightHeight = node->rightSon->height;
-        }
-        if (leftHeight >= rightHeight) {
-            return leftHeight;
-        }
-        return rightHeight;
+        return node->height;
     }
 
     int getBF(node* node) const {
