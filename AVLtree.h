@@ -108,9 +108,13 @@ public:
     }
 
     void remove(int key) {
-        node* toRemove = find(key);
-        if (!toRemove) {
-            return;
+        node* toRemove = root;
+        while (toRemove != nullptr && toRemove->key != key) {
+            if (key < toRemove->key) {
+                toRemove = toRemove->leftSon;
+            } else {
+                toRemove = toRemove->rightSon;
+            }
         }
         if (toRemove->leftSon != nullptr && toRemove->rightSon != nullptr) {
             node* successor = toRemove->rightSon;

@@ -19,7 +19,24 @@ StatusType DiningRoom::addTable(int tableId, int capacity) {
 }
 
 StatusType DiningRoom::removeTable(int tableId) {
-    //DOR
+    if (tableId <= 0) {
+        return StatusType::INVALID_INPUT;
+    }
+    Dining_Room_Val** tablePtr = tree.find(tableId);
+    if (tablePtr == nullptr) {
+        return StatusType::FAILURE;
+    }
+    Dining_Room_Val* table = *tablePtr;
+    if (table->guestsTree.getNumNodes() > 0) {
+        return StatusType::FAILURE;
+    }
+    try {
+        tree.remove(tableId);
+        delete table;
+    } catch (const std::exception &e) {
+        return StatusType::ALLOCATION_ERROR;
+    }
+    return StatusType::SUCCESS;
 }
 
 StatusType DiningRoom::enterDiningRoom(int guestId, int tableId, Guests_Tree &guests) {
