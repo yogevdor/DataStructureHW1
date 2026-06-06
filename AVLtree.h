@@ -248,7 +248,40 @@ private:
 
     node* rotateRL(node* v); //DOR
 
-    node* rotateRR(node* v); //DOR
+    node* rotateRR(node* v) {
+        node* A = v->rightSon;
+        A->parent = v->parent;
+        if (v->parent != nullptr) {
+            if (v->parent->leftSon == v) {
+                v->parent->leftSon = A;
+            } else {
+                v->parent->rightSon = A;
+            }
+        } else {
+            root = A;
+        }
+        v->parent = A;
+        v->rightSon = A->leftSon;
+        if (A->leftSon != nullptr) {
+            A->leftSon->parent = v;
+        }
+        A->leftSon = v;
+        int vLeftHeight = getHeight(v->leftSon);
+        int vRightHeight = getHeight(v->rightSon);
+        if (vLeftHeight >= vRightHeight) {
+            v->height = 1 + vLeftHeight;
+        } else {
+            v->height = 1 + vRightHeight;
+        }
+        int aLeftHeight = getHeight(A->leftSon);
+        int aRightHeight = getHeight(A->rightSon);
+        if (aLeftHeight >= aRightHeight) {
+            A->height = 1 + aLeftHeight;
+        } else {
+            A->height = 1 + aRightHeight;
+        }
+        return A;
+    }
 
     node* rotateLR(node* v) {
         //YAARA
