@@ -1,17 +1,10 @@
-
 #include "wet1util.h"
-
-namespace std {
-    class bad_alloc;
-}
 
 class Rooms_Tree;
 
 template<class T>
 class AVLtree {
-
     friend class ::Rooms_Tree;
-
 
 protected:
     struct node {
@@ -22,14 +15,18 @@ protected:
         node* rightSon;
         node* parent;
     };
+
     int num_node; //total nodes
     node* root;
 
 public:
     AVLtree(); //DOR
+
     ~AVLtree(); //DOR
-    AVLtree(const AVLtree&) = delete;            // חוסם בנאי העתקה
-    AVLtree& operator=(const AVLtree& t) {
+
+    AVLtree(const AVLtree &) = delete; // חוסם בנאי העתקה
+
+    AVLtree &operator=(const AVLtree &t) {
         if (this == &t) {
             return *this;
         }
@@ -42,6 +39,7 @@ public:
         temp.num_node = temp_num;
         return *this;
     }
+
     //insert new key and value,if key exists does nothing, keeps balance
     void insert(int key, T value); //DOR, update total
 
@@ -57,9 +55,11 @@ public:
     //return pointer to the value with min key
     T* getMin(); //DOR
 
-    int getNumNodes();//Yaara
+    int getNumNodes(); //Yaara
+
     //make an empty tree
     void clearTree(); //DOR
+
     static AVLtree<T>* mergeTrees(AVLtree<T>* tree1, AVLtree<T>* tree2) {
         int size1 = tree1->num_node;
         int size2 = tree2->num_node;
@@ -71,22 +71,21 @@ public:
             newTree = new AVLtree<T>();
             if (size2 == 0)
                 return newTree;
-            if(size1 == 0)
+            if (size1 == 0)
                 return newTree;
             tree1_arr = new node*[size1];
             tree1->inOrderToArray(tree1_arr);
             tree2_arr = new node*[size2];
             tree2->inOrderToArray(tree2_arr);
-            newTree_arr = new node*[size1+size2];
+            newTree_arr = new node*[size1 + size2];
             merge_sort(tree1_arr, size1, tree2_arr, size2, newTree_arr);
-            newTree->root = fill_from_arr(newTree_arr, 0, size1+size2-1, newTree->root);
+            newTree->root = fill_from_arr(newTree_arr, 0, size1 + size2 - 1, newTree->root);
             newTree->num_node = size1 + size2;
             tree1->root = nullptr;
             tree1->num_node = 0;
             tree2->root = nullptr;
             tree2->num_node = 0;
-        }
-        catch (const std::bad_alloc& e) {
+        } catch (const std::exception &e) {
             delete[] tree1_arr;
             delete[] tree2_arr;
             delete[] newTree_arr;
@@ -95,20 +94,26 @@ public:
         }
         return newTree;
     }
+
 private:
     node* rotateRL(node* v); //DOR
+
     node* rotateRR(node* v); //DOR
-    node* rotateLR(node* v) {//YAARA
+
+    node* rotateLR(node* v) {
+        //YAARA
         v->leftSon = rotateRR(v->leftSon);
         return rotateLL(v);
     }
-    node* rotateLL(node* v) {//YAARA
+
+    node* rotateLL(node* v) {
+        //YAARA
         node* original_parent = v->parent;
         node* c = v->leftSon->rightSon;
         node* b = v->leftSon;
         b->rightSon = v;
         v->leftSon = c;
-        if(c != nullptr)
+        if (c != nullptr)
             c->parent = v;
         v->parent = b;
         b->parent = original_parent;
@@ -144,6 +149,7 @@ private:
         }
         return b;
     }
+
     node* fill_from_arr(node** newTree_arr, int start, int end, node* parent) {
         if (start > end) {
             return nullptr;
@@ -181,69 +187,73 @@ private:
         int index2 = 0;
         int indexDest = 0;
         while (size1 != 0 && size2 != 0) {
-            if(arr1[index1]->key < arr2[index2]->key) {
+            if (arr1[index1]->key < arr2[index2]->key) {
                 dest[indexDest] = arr1[index1];
                 size1--;
                 index1++;
-            }
-            else {
+            } else {
                 dest[indexDest] = arr2[index2];
                 size2--;
                 index2++;
             }
             indexDest++;
         }
-        while(size1 != 0) {
+        while (size1 != 0) {
             dest[indexDest] = arr1[index1];
             size1--;
             index1++;
             indexDest++;
         }
-        while(size2 != 0) {
+        while (size2 != 0) {
             dest[indexDest] = arr2[index2];
             size2--;
             index2++;
             indexDest++;
         }
-
     }
+
     void inOrderToArray(node** arr) {
-        if(this->root == nullptr)
+        if (this->root == nullptr)
             return;
         node* current = this->root;
         node* last = nullptr;
         int arr_index = 0;
         while (current != nullptr) {
-            if (last == nullptr || last == current->parent) { //on our way down
-                if (current->leftSon != nullptr) { //go left
+            if (last == nullptr || last == current->parent) {
+                //on our way down
+                if (current->leftSon != nullptr) {
+                    //go left
                     last = current;
                     current = current->leftSon;
                 } else {
                     // no more left
                     arr[arr_index] = current;
                     arr_index++;
-                    if (current->rightSon != nullptr) { //go right
+                    if (current->rightSon != nullptr) {
+                        //go right
                         last = current;
                         current = current->rightSon;
-                    } else { //finished, go up
+                    } else {
+                        //finished, go up
                         last = current;
                         current = current->parent;
                     }
                 }
-            }
-            else if (current->leftSon == last) { //on our way up from the left
+            } else if (current->leftSon == last) {
+                //on our way up from the left
                 arr[arr_index] = current;
                 arr_index++;
-                if (current->rightSon != nullptr) {  //go right
+                if (current->rightSon != nullptr) {
+                    //go right
                     last = current;
                     current = current->rightSon;
-                }
-                else { //finished, go up
+                } else {
+                    //finished, go up
                     last = current;
                     current = current->parent;
                 }
-            }
-            else if (current->rightSon == last) { //on our way up from the right
+            } else if (current->rightSon == last) {
+                //on our way up from the right
                 last = current;
                 current = current->parent;
             }
