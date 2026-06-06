@@ -1,5 +1,7 @@
 #include "DiningRoom.h"
 
+#include "Guests_Tree.h"
+
 StatusType DiningRoom::addTable(int tableId, int capacity) {
     if (tableId <= 0 || capacity <= 0) {
         return StatusType::INVALID_INPUT;
@@ -43,16 +45,21 @@ StatusType DiningRoom::enterDiningRoom(int guestId, int tableId, Guests_Tree &gu
     //YAARA
     if (guestId <= 0 || tableId <= 0)
         return StatusType::INVALID_INPUT;
-    Guests_Tree::Guest_Val* current_guest = guests.tree.find(guestId);
+
+    Guest_Val* current_guest = guests.tree.find(guestId);
     if (current_guest == nullptr) //no such guest
         return StatusType::FAILURE;
     if (current_guest->diningRoom != nullptr) //in dining room
         return StatusType::FAILURE;
     if (current_guest->lastMeal == this->getLastMeal()) //was in this meal
         return StatusType::FAILURE;
-    DiningRoom::Dining_Room_Val* current_table = this->tree.find(tableId);
-    if (current_table == nullptr) //no such table
+
+    Dining_Room_Val** current_tablePtr = this->tree.find(tableId);
+    if (current_tablePtr == nullptr) {
+        //no such table
         return StatusType::FAILURE;
+    }
+    Dining_Room_Val* current_table = *current_tablePtr;
     if (current_table->guestsTree.getNumNodes() == current_table->capacity) //table is full
         return StatusType::FAILURE;
     try {
@@ -69,13 +76,17 @@ StatusType DiningRoom::leaveDiningRoom(int guestId, int tableId) {
     //YAARA
     if (guestId <= 0 || tableId <= 0)
         return StatusType::INVALID_INPUT;
-    DiningRoom::Dining_Room_Val* current_table = this->tree.find(tableId);
-    if (current_table == nullptr) //no such table
+
+    Dining_Room_Val** tablePtr = this->tree.find(tableId);
+    if (tablePtr == nullptr) //no such table
         return StatusType::FAILURE;
-    Guests_Tree::Guest_Val** current_guest = current_table->guestsTree.find(guestId);
+
+    Dining_Room_Val* current_table = *tablePtr;
+    Guest_Val** current_guest = current_table->guestsTree.find(guestId);
     if (current_guest == nullptr) //no such guest in table
         return StatusType::FAILURE;
-    Guests_Tree::Guest_Val* actual_guest = *current_guest;
+
+    Guest_Val* actual_guest = *current_guest;
     try {
         current_table->guestsTree.remove(guestId);
         actual_guest->diningRoom = nullptr;
@@ -99,15 +110,19 @@ StatusType DiningRoom::joinTables(int tableId1, int tableId2) {
         return StatusType::INVALID_INPUT;
     if (tableId1 == tableId2)
         return StatusType::INVALID_INPUT;
-    DiningRoom::Dining_Room_Val* table_1 = this->tree.find(tableId1);
-    if (table_1 == nullptr) //no such table
+
+    Dining_Room_Val** table_1Ptr = this->tree.find(tableId1);
+    if (table_1Ptr == nullptr) //no such table
         return StatusType::FAILURE;
-    DiningRoom::Dining_Room_Val* table_2 = this->tree.find(tableId2);
-    if (table_2 == nullptr) //no such table
+    Dining_Room_Val** table_2Ptr = this->tree.find(tableId2);
+    if (table_2Ptr == nullptr) //no such table
         return StatusType::FAILURE;
+
+    Dining_Room_Val* table_1 = *table_1Ptr;
+    Dining_Room_Val* table_2 = *table_2Ptr;
     int newCapacity = table_1->capacity + table_2->capacity;
     try {
-        AVLtree<Guests_Tree::Guest_Val*>* merged_tables = AVLtree<Guests_Tree::Guest_Val
+        AVLtree<Guest_Val*>* merged_tables = AVLtree<Guest_Val
             *>::mergeTrees(&(table_1->guestsTree), &(table_2->guestsTree));
         table_1->guestsTree = *merged_tables;
         table_1->capacity = newCapacity;
