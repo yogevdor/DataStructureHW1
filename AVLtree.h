@@ -42,8 +42,65 @@ public:
 
     //insert new key and value,if key exists does nothing, keeps balance
     void insert(int key, T value) {
-        if (!find(key)) {
+        if (find(key) != nullptr) {
             return;
+        }
+        node* newNode = new node();
+        newNode->key = key;
+        newNode->value = value;
+        newNode->height = 0;
+        newNode->leftSon = nullptr;
+        newNode->rightSon = nullptr;
+        newNode->parent = nullptr;
+        if (root == nullptr) {
+            root = newNode;
+            num_node++;
+            return;
+        }
+        node* current = root;
+        bool inserted = false;
+        while (!inserted) {
+            if (current->key < key) {
+                if (current->rightSon == nullptr) {
+                    current->rightSon = newNode;
+                    newNode->parent = current;
+                    inserted = true;
+                    continue;
+                }
+                current = current->rightSon;
+                continue;
+            }
+            if (current->key > key) {
+                if (current->leftSon == nullptr) {
+                    current->leftSon = newNode;
+                    newNode->parent = current;
+                    inserted = true;
+                    continue;
+                }
+                current = current->leftSon;
+            }
+        }
+        num_node++;
+        node* temp = newNode->parent;
+        while (temp != nullptr) {
+            temp->height = 1 + getHeight(temp);
+            int bf = getBF(temp);
+            if (bf > 1 || bf < -1) {
+                if (bf > 1) {
+                    if (getBF(temp->leftSon) >= 0) {
+                        temp = rotateLL(temp);
+                    } else {
+                        temp = rotateLR(temp);
+                    }
+                } else {
+                    if (getBF(temp->rightSon) <= 0) {
+                        temp = rotateRR(temp);
+                    } else {
+                        temp = rotateRL(temp);
+                    }
+                }
+            }
+            temp = temp->parent;
         }
     } //DOR, update total
 
@@ -280,5 +337,29 @@ private:
                 current = current->parent;
             }
         }
+    }
+
+    int getHeight(node* node) const {
+        if (node == nullptr) {
+            return -1;
+        }
+        int leftHeight = -1,rightHeight = -1;
+        if (node->leftSon != nullptr) {
+            leftHeight = node->leftSon->height;
+        }
+        if (node->rightSon != nullptr) {
+            rightHeight = node->rightSon->height;
+        }
+        if (leftHeight >= rightHeight) {
+            return leftHeight;
+        }
+        return rightHeight;
+    }
+
+    int getBF(node* node) const {
+        if (node == nullptr) {
+            return 0;
+        }
+        return getHeight(node->leftSon) - getHeight(node->rightSon);
     }
 };
