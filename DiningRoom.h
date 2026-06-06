@@ -15,7 +15,7 @@ class DiningRoom {
     friend class ::Guests_Tree;
 
 private:
-    AVLtree<Dining_Room_Val> tree;
+    AVLtree<Dining_Room_Val*> tree;
     int mealCount;
 
 public:

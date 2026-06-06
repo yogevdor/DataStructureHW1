@@ -1,7 +1,21 @@
 #include "DiningRoom.h"
 
 StatusType DiningRoom::addTable(int tableId, int capacity) {
-    //DOR
+    if (tableId <= 0 || capacity <= 0) {
+        return StatusType::INVALID_INPUT;
+    }
+    if (tree.contains(tableId)) {
+        return StatusType::FAILURE;
+    }
+    auto* val = new Dining_Room_Val();
+    val->capacity = capacity;
+    try {
+        tree.insert(tableId, val);
+    } catch (const std::exception &e) {
+        delete val;
+        return StatusType::ALLOCATION_ERROR;
+    }
+    return StatusType::SUCCESS;
 }
 
 StatusType DiningRoom::removeTable(int tableId) {
