@@ -246,7 +246,10 @@ private:
         delete node;
     }
 
-    node* rotateRL(node* v); //DOR
+    node* rotateRL(node* v) {
+        v->rightSon = rotateLL(v->rightSon);
+        return rotateRR(v);
+    }
 
     node* rotateRR(node* v) {
         node* A = v->rightSon;
