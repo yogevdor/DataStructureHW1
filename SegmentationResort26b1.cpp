@@ -70,9 +70,10 @@ StatusType SegmentationResort::enterDiningRoom(int guestId, int tableId) {
     return this->dining_room->enterDiningRoom(guestId, tableId, guests);
 }
 
+// all of the below need to be pointer fixed and checked
 StatusType SegmentationResort::leaveDiningRoom(int guestId, int tableId) {
     return this->dining_room->leaveDiningRoom(guestId, tableId);
-}
+} //check that when removing guests it doesnt delte guests memory of the guests main tree
 
 StatusType SegmentationResort::reheatFood() {
     return this->dining_room->reheatFood();
