@@ -240,6 +240,17 @@ public:
         return newTree;
     }
 
+    void takeOwnership(AVLtree<T>* otherTree) {
+        if (otherTree == nullptr) {
+            return;
+        }
+        this->clearTree();
+        this->root = otherTree->root;
+        this->num_node = otherTree->num_node;
+        otherTree->root = nullptr;
+        otherTree->num_node = 0;
+    }
+
 private:
     void clearTree(node* node) {
         if (node == nullptr) {
@@ -340,24 +351,24 @@ private:
         return b;
     }
 
-    node* fill_from_arr(node** newTree_arr, int start, int end, node* parent) {
+    static node* fill_from_arr(node** newTree_arr, int start, int end, node* parent) {
         if (start > end) {
             return nullptr;
         }
         int mid = start + (end - start) / 2;
-        node* root = newTree_arr[mid];
-        root->parent = parent;
-        root->leftSon = fill_from_arr(newTree_arr, start, mid - 1, root);
-        root->rightSon = fill_from_arr(newTree_arr, mid + 1, end, root);
+        node* Root = newTree_arr[mid];
+        Root->parent = parent;
+        Root->leftSon = fill_from_arr(newTree_arr, start, mid - 1, Root);
+        Root->rightSon = fill_from_arr(newTree_arr, mid + 1, end, Root);
         int left_height;
-        if (root->leftSon != nullptr) {
-            left_height = root->leftSon->height;
+        if (Root->leftSon != nullptr) {
+            left_height = Root->leftSon->height;
         } else {
             left_height = -1;
         }
         int right_height;
-        if (root->rightSon != nullptr) {
-            right_height = root->rightSon->height;
+        if (Root->rightSon != nullptr) {
+            right_height = Root->rightSon->height;
         } else {
             right_height = -1;
         }
@@ -367,12 +378,12 @@ private:
         } else {
             max_height = right_height;
         }
-        root->height = 1 + max_height;
+        Root->height = 1 + max_height;
 
-        return root;
+        return Root;
     }
 
-    void merge_sort(node** arr1, int size1, node** arr2, int size2, node** dest) {
+    static void merge_sort(node** arr1, int size1, node** arr2, int size2, node** dest) {
         int index1 = 0;
         int index2 = 0;
         int indexDest = 0;

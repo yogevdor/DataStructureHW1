@@ -1,5 +1,4 @@
 #include "DiningRoom.h"
-
 #include "Guests_Tree.h"
 
 StatusType DiningRoom::addTable(int tableId, int capacity) {
@@ -124,7 +123,7 @@ StatusType DiningRoom::joinTables(int tableId1, int tableId2) {
     try {
         AVLtree<Guest_Val*>* merged_tables = AVLtree<Guest_Val
             *>::mergeTrees(&(table_1->guestsTree), &(table_2->guestsTree));
-        table_1->guestsTree = *merged_tables;
+        table_1->guestsTree.takeOwnership(*merged_tables); //here we have a problem
         table_1->capacity = newCapacity;
         delete merged_tables;
     } catch (const std::exception &e) {
