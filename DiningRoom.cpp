@@ -24,17 +24,15 @@ StatusType DiningRoom::removeTable(int tableId) {
     if (tableId <= 0) {
         return StatusType::INVALID_INPUT;
     }
-    Dining_Room_Val** tablePtr = tablesTree.find(tableId);
+    auto tablePtr = tablesTree.find(tableId);
     if (tablePtr == nullptr) {
         return StatusType::FAILURE;
     }
-    Dining_Room_Val* table = *tablePtr;
-    if (table->guestsTree.getNumNodes() > 0) {
+    if (tablePtr->value->guestsTree.getNumNodes() > 0) {
         return StatusType::FAILURE;
     }
     try {
         tablesTree.remove(tableId);
-        delete table;
     } catch (const std::exception &e) {
         return StatusType::ALLOCATION_ERROR;
     }
