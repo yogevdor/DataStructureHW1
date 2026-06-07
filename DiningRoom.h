@@ -32,7 +32,7 @@ public:
 
     StatusType removeTable(int tableId);
 
-    StatusType enterDiningRoom(int guestId, int tableId, Guests_Tree &guests);
+    StatusType enterDiningRoom(int guestId, int tableId, const Guests_Tree* guests);
 
     StatusType leaveDiningRoom(int guestId, int tableId);
 

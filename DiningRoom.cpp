@@ -39,31 +39,30 @@ StatusType DiningRoom::removeTable(int tableId) {
     return StatusType::SUCCESS;
 }
 
-StatusType DiningRoom::enterDiningRoom(int guestId, int tableId, Guests_Tree &guests) {
-    //YAARA
-    if (guestId <= 0 || tableId <= 0)
+StatusType DiningRoom::enterDiningRoom(int guestId, int tableId, const Guests_Tree* guests) {
+    if (guestId <= 0 || tableId <= 0) {
         return StatusType::INVALID_INPUT;
-
-    Guest_Val* current_guest = guests.guestsTree.find(guestId);
+    }
+    auto current_guest = guests->find(guestId);
     if (current_guest == nullptr) //no such guest
         return StatusType::FAILURE;
-    if (current_guest->diningTable != nullptr) //in dining room
+    if (current_guest->value.diningTable != nullptr) //in dining room
         return StatusType::FAILURE;
-    if (current_guest->lastMeal == this->getLastMeal()) //was in this meal
+    if (current_guest->value.lastMeal == this->getLastMeal()) //was in this meal
         return StatusType::FAILURE;
 
-    Dining_Room_Val** current_tablePtr = this->tablesTree.find(tableId);
+    auto current_tablePtr = tablesTree.find(tableId);
     if (current_tablePtr == nullptr) {
         //no such table
         return StatusType::FAILURE;
     }
-    Dining_Room_Val* current_table = *current_tablePtr;
-    if (current_table->guestsTree.getNumNodes() == current_table->capacity) //table is full
+    if (current_tablePtr->value->guestsTree.getNumNodes() == current_tablePtr->value->capacity) {
+        //table is full
         return StatusType::FAILURE;
+    }
     try {
-        current_table->guestsTree.insert(guestId, current_guest);
-        current_guest->diningTable = current_table;
-        current_guest->table_index = tableId;
+        current_tablePtr->value->guestsTree.insert(guestId, &current_guest->value);
+        current_guest->value.diningTable = current_tablePtr->value;
     } catch (const std::exception &e) {
         return StatusType::ALLOCATION_ERROR;
     }

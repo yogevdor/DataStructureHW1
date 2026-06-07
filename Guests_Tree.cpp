@@ -71,3 +71,7 @@ output_t<int> Guests_Tree::joinFriend(int guestId1, int guestId2, DiningRoom &di
 bool Guests_Tree::contains(int guestId) const {
     return guestsTree.find(guestId);
 }
+
+AVLtree<Guest_Val>::node* Guests_Tree::find(int guestId) const {
+    return this->guestsTree.find(guestId);
+}

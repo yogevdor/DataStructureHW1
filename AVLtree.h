@@ -3,6 +3,7 @@
 template<class T>
 class AVLtree {
     friend class Rooms_Tree;
+    friend class Guests_Tree;
 
 private:
     struct node {

@@ -67,7 +67,7 @@ StatusType SegmentationResort::removeTable(int tableId) {
 }
 
 StatusType SegmentationResort::enterDiningRoom(int guestId, int tableId) {
-    return this->dining_room->enterDiningRoom(guestId, tableId, *(this->guests));
+    return this->dining_room->enterDiningRoom(guestId, tableId, guests);
 }
 
 StatusType SegmentationResort::leaveDiningRoom(int guestId, int tableId) {

@@ -37,6 +37,8 @@ public:
 
     bool contains(int guestId) const;
 
+    AVLtree<Guest_Val>::node* find(int guestId) const;
+
     //StatusType enterDiningRoom(int guestId, int tableId, DiningRoom& dining_room);
 };
 
