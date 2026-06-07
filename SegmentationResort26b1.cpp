@@ -6,7 +6,6 @@
 #include "Rooms_Tree.h"
 #include "DiningRoom.h"
 
-//dor
 SegmentationResort::SegmentationResort() : dining_room(new DiningRoom()), guests(new
                                                Guests_Tree()), rooms(new Rooms_Tree()) {
 }
@@ -17,7 +16,6 @@ SegmentationResort::~SegmentationResort() {
     delete this->rooms;
 }
 
-//dor
 StatusType SegmentationResort::checkIn(int geustId, int roomNum) {
     if (geustId <= 0 || roomNum <= 0) {
         return StatusType::INVALID_INPUT;
@@ -60,14 +58,12 @@ StatusType SegmentationResort::checkOut(int geustId) {
     return StatusType::SUCCESS;
 }
 
-//dor
 StatusType SegmentationResort::addTable(int tableId, int capacity) {
-    return StatusType::FAILURE;
+    return this->dining_room->addTable(tableId, capacity);
 }
 
-//dor
 StatusType SegmentationResort::removeTable(int tableId) {
-    return StatusType::FAILURE;
+    return this->dining_room->removeTable(tableId);
 }
 
 StatusType SegmentationResort::enterDiningRoom(int guestId, int tableId) {

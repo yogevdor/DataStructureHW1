@@ -41,6 +41,8 @@ public:
     StatusType joinTables(int tableId1, int tableId2);
 
     int getLastMeal() const;
+
+    bool contains(int tableId);
 };
 
 #endif //DININGROOM_TREE_H

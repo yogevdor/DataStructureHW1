@@ -137,3 +137,7 @@ int DiningRoom::getLastMeal() const {
     //YAARA
     return this->mealCount;
 }
+
+bool DiningRoom::contains(int tableId) {
+    return this->tablesTree.contains(tableId);
+}
