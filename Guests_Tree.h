@@ -9,15 +9,16 @@ class DiningRoom;
 struct Guest_Val {
     int roomNum;
     int lastMeal;
-    Dining_Room_Val* diningRoom = nullptr;
-    int table_index = -1;
+    Dining_Room_Val* diningTable = nullptr;
 };
 
 class Guests_Tree {
-    friend class ::DiningRoom;
+    friend class SegmentationResort;
+    friend class DiningRoom;
 
 private:
-    AVLtree<Guest_Val> tree;
+    AVLtree<Guest_Val> guestsTree;
+    AVLtree<int> roomsTree;
 
 public:
     Guests_Tree() = default;
@@ -28,11 +29,13 @@ public:
 
     Guests_Tree &operator=(const Guests_Tree &) = delete; // חוסם אופרטור השמה
 
-    StatusType checkIn(int guestId, int roomNum);
+    void insert(int guestId, int roomNum);
 
-    StatusType checkOut(int guestId);
+    void remove(int guestId);
 
     output_t<int> joinFriend(int guestId1, int guestId2, DiningRoom &dining_room);
+
+    bool contains(int guestId) const;
 
     //StatusType enterDiningRoom(int guestId, int tableId, DiningRoom& dining_room);
 };

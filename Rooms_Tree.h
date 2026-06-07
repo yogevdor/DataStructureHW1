@@ -3,12 +3,18 @@
 #include "AVLtree.h"
 #include "wet1util.h"
 
+struct Rooms_Val {
+    int roomNum;
+    int guestId;
+};
 
 class Rooms_Tree {
+    friend class SegmentationResort;
+
 private:
-    AVLtree<int> tree;
-    AVLtree<int>::node* cleaningStaff = nullptr;
-    AVLtree<int>::node* minRoom = nullptr;
+    AVLtree<Rooms_Val> roomsTree;
+    AVLtree<Rooms_Val>::node* cleaningStaff = nullptr;
+    AVLtree<Rooms_Val>::node* minRoom = nullptr;
 
 public:
     Rooms_Tree() = default;
@@ -19,12 +25,15 @@ public:
 
     Rooms_Tree &operator=(const Rooms_Tree &) = delete; // חוסם אופרטור השמה
 
-    StatusType insert(int guestId, int roomNum);
+    void insert(int roomNum, int guestId);
+
+    void remove(int roomNum);
 
     output_t<int> cleanNextRoom();
 
-    StatusType checkOut(int guestId);
-};
+    bool contains(int roomNum) const;
 
+    AVLtree<Rooms_Val>::node* findMin() const;
+};
 
 #endif //ROOMS_TREE_H

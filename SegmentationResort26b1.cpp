@@ -7,20 +7,57 @@
 #include "DiningRoom.h"
 
 //dor
-SegmentationResort::SegmentationResort() {
+SegmentationResort::SegmentationResort() : dining_room(new DiningRoom()), guests(new
+                                               Guests_Tree()), rooms(new Rooms_Tree()) {
 }
 
 SegmentationResort::~SegmentationResort() {
+    delete this->dining_room;
+    delete this->guests;
+    delete this->rooms;
 }
 
 //dor
 StatusType SegmentationResort::checkIn(int geustId, int roomNum) {
-    return StatusType::FAILURE;
+    if (geustId <= 0 || roomNum <= 0) {
+        return StatusType::INVALID_INPUT;
+    }
+    if (guests->contains(geustId)) {
+        return StatusType::FAILURE;
+    }
+    if (rooms->contains(roomNum)) {
+        return StatusType::FAILURE;
+    }
+    try {
+        rooms->insert(roomNum, geustId);
+    } catch (std::exception &e) {
+        return StatusType::ALLOCATION_ERROR;
+    }
+    try {
+        guests->insert(geustId, roomNum);
+    } catch (std::exception &e) {
+        rooms->remove(roomNum);
+        return StatusType::ALLOCATION_ERROR;
+    }
+    return StatusType::SUCCESS;
 }
 
-//dor
 StatusType SegmentationResort::checkOut(int geustId) {
-    return StatusType::FAILURE;
+    if (geustId <= 0) {
+        return StatusType::INVALID_INPUT;
+    }
+
+    if (!guests->contains(geustId) || guests->guestsTree.find(geustId)->value.diningTable
+        != nullptr) {
+        return StatusType::FAILURE;
+    }
+    try {
+        guests->remove(geustId);
+        rooms->remove(geustId);
+    } catch (const std::exception &e) {
+        return StatusType::ALLOCATION_ERROR;
+    }
+    return StatusType::SUCCESS;
 }
 
 //dor

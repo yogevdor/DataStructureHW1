@@ -5,13 +5,14 @@ StatusType DiningRoom::addTable(int tableId, int capacity) {
     if (tableId <= 0 || capacity <= 0) {
         return StatusType::INVALID_INPUT;
     }
-    if (tree.contains(tableId)) {
+    if (tablesTree.contains(tableId)) {
         return StatusType::FAILURE;
     }
     auto* val = new Dining_Room_Val();
     val->capacity = capacity;
+    val->tableId = tableId;
     try {
-        tree.insert(tableId, val);
+        tablesTree.insert(tableId, val);
     } catch (const std::exception &e) {
         delete val;
         return StatusType::ALLOCATION_ERROR;
@@ -23,7 +24,7 @@ StatusType DiningRoom::removeTable(int tableId) {
     if (tableId <= 0) {
         return StatusType::INVALID_INPUT;
     }
-    Dining_Room_Val** tablePtr = tree.find(tableId);
+    Dining_Room_Val** tablePtr = tablesTree.find(tableId);
     if (tablePtr == nullptr) {
         return StatusType::FAILURE;
     }
@@ -32,7 +33,7 @@ StatusType DiningRoom::removeTable(int tableId) {
         return StatusType::FAILURE;
     }
     try {
-        tree.remove(tableId);
+        tablesTree.remove(tableId);
         delete table;
     } catch (const std::exception &e) {
         return StatusType::ALLOCATION_ERROR;
@@ -45,15 +46,15 @@ StatusType DiningRoom::enterDiningRoom(int guestId, int tableId, Guests_Tree &gu
     if (guestId <= 0 || tableId <= 0)
         return StatusType::INVALID_INPUT;
 
-    Guest_Val* current_guest = guests.tree.find(guestId);
+    Guest_Val* current_guest = guests.guestsTree.find(guestId);
     if (current_guest == nullptr) //no such guest
         return StatusType::FAILURE;
-    if (current_guest->diningRoom != nullptr) //in dining room
+    if (current_guest->diningTable != nullptr) //in dining room
         return StatusType::FAILURE;
     if (current_guest->lastMeal == this->getLastMeal()) //was in this meal
         return StatusType::FAILURE;
 
-    Dining_Room_Val** current_tablePtr = this->tree.find(tableId);
+    Dining_Room_Val** current_tablePtr = this->tablesTree.find(tableId);
     if (current_tablePtr == nullptr) {
         //no such table
         return StatusType::FAILURE;
@@ -63,7 +64,7 @@ StatusType DiningRoom::enterDiningRoom(int guestId, int tableId, Guests_Tree &gu
         return StatusType::FAILURE;
     try {
         current_table->guestsTree.insert(guestId, current_guest);
-        current_guest->diningRoom = current_table;
+        current_guest->diningTable = current_table;
         current_guest->table_index = tableId;
     } catch (const std::exception &e) {
         return StatusType::ALLOCATION_ERROR;
@@ -76,7 +77,7 @@ StatusType DiningRoom::leaveDiningRoom(int guestId, int tableId) {
     if (guestId <= 0 || tableId <= 0)
         return StatusType::INVALID_INPUT;
 
-    Dining_Room_Val** tablePtr = this->tree.find(tableId);
+    Dining_Room_Val** tablePtr = this->tablesTree.find(tableId);
     if (tablePtr == nullptr) //no such table
         return StatusType::FAILURE;
 
@@ -88,7 +89,7 @@ StatusType DiningRoom::leaveDiningRoom(int guestId, int tableId) {
     Guest_Val* actual_guest = *current_guest;
     try {
         current_table->guestsTree.remove(guestId);
-        actual_guest->diningRoom = nullptr;
+        actual_guest->diningTable = nullptr;
         actual_guest->lastMeal = this->mealCount;
         actual_guest->table_index = -1;
     } catch (const std::exception &e) {
@@ -110,10 +111,10 @@ StatusType DiningRoom::joinTables(int tableId1, int tableId2) {
     if (tableId1 == tableId2)
         return StatusType::INVALID_INPUT;
 
-    Dining_Room_Val** table_1Ptr = this->tree.find(tableId1);
+    Dining_Room_Val** table_1Ptr = this->tablesTree.find(tableId1);
     if (table_1Ptr == nullptr) //no such table
         return StatusType::FAILURE;
-    Dining_Room_Val** table_2Ptr = this->tree.find(tableId2);
+    Dining_Room_Val** table_2Ptr = this->tablesTree.find(tableId2);
     if (table_2Ptr == nullptr) //no such table
         return StatusType::FAILURE;
 

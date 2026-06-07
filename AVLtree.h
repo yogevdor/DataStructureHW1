@@ -1,12 +1,10 @@
 #include "wet1util.h"
 
-class Rooms_Tree;
-
 template<class T>
 class AVLtree {
-    friend class ::Rooms_Tree;
+    friend class Rooms_Tree;
 
-protected:
+private:
     struct node {
         int key = 0;
         int height = 0;
@@ -176,14 +174,14 @@ public:
         }
     }
 
-    T* find(int key) const {
+    node* find(int key) const {
         if (root == nullptr) {
             return nullptr;
         }
         node* current = root;
         while (current) {
             if (current->key == key) {
-                return &current->value;
+                return current;
             }
             if (current->key > key) {
                 current = current->leftSon;

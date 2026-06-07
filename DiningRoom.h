@@ -9,13 +9,14 @@ struct Guest_Val;
 struct Dining_Room_Val {
     AVLtree<Guest_Val*> guestsTree;
     int capacity;
+    int tableId;
 };
 
 class DiningRoom {
-    friend class ::Guests_Tree;
+    friend class Guests_Tree;
 
 private:
-    AVLtree<Dining_Room_Val*> tree;
+    AVLtree<Dining_Room_Val*> tablesTree;
     int mealCount;
 
 public:
