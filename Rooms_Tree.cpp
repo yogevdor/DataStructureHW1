@@ -1,28 +1,42 @@
 #include "Rooms_Tree.h"
 
+Rooms_Tree::~Rooms_Tree() {
+    clearNodes(roomsTree.root);
+}
+
+void Rooms_Tree::clearNodes(AVLtree<Rooms_Val>::node* current) {
+    if (current == nullptr) {
+        return;
+    }
+    clearNodes(current->leftSon);
+    clearNodes(current->rightSon);
+    delete current->value.list_node;
+}
+
 void Rooms_Tree::insert(int roomNum, int guestId) {
     Rooms_Val currentRoom;
-    currentRoom.roomNum = roomNum;
-    currentRoom.guestId = guestId;
-    currentRoom.next =  find_next(roomNum);
-    currentRoom.prev =  find_prev(roomNum);
+    currentRoom.list_node = new Rooms_list_node();
+    currentRoom.list_node->roomNum = roomNum;
+    currentRoom.list_node->guestId = guestId;
+    currentRoom.list_node->next =  find_next(roomNum);
+    currentRoom.list_node->prev =  find_prev(roomNum);
     this->roomsTree.insert(roomNum, currentRoom);
-    Rooms_Val* inserted = &this->roomsTree.find(roomNum)->value;
-    if(inserted->prev == nullptr)
+    Rooms_list_node* inserted = this->roomsTree.find(roomNum)->value.list_node;
+    if (minRoom == nullptr || roomNum < minRoom->roomNum) {
         minRoom = inserted;
-    else
+    }
+    if(inserted->prev != nullptr)
         inserted->prev->next = inserted;
-
     if(inserted->next != nullptr)
         inserted->next->prev = inserted;
 }
 
-Rooms_Val* Rooms_Tree::find_next(int roomNnum) {
+Rooms_list_node* Rooms_Tree::find_next(int roomNnum) {
     AVLtree<Rooms_Val> ::node* current = this->roomsTree.root;
-    Rooms_Val* next = nullptr;
+    Rooms_list_node* next = nullptr;
     while (current != nullptr) {
         if(current->key > roomNnum) {
-            next = &(current->value);
+            next = (current->value.list_node);
             current = current->leftSon;
         }
         else
@@ -30,12 +44,12 @@ Rooms_Val* Rooms_Tree::find_next(int roomNnum) {
     }
     return next;
 }
-Rooms_Val* Rooms_Tree::find_prev(int roomNnum) {
+Rooms_list_node* Rooms_Tree::find_prev(int roomNnum) {
     AVLtree<Rooms_Val> ::node* current = this->roomsTree.root;
-    Rooms_Val* prev = nullptr;
+    Rooms_list_node* prev = nullptr;
     while (current != nullptr) {
         if(current->key < roomNnum) {
-            prev = &(current->value);
+            prev = (current->value.list_node);
             current = current->rightSon;
         }
         else
@@ -54,12 +68,13 @@ void Rooms_Tree::remove(int roomNum) {
     if (cleaningStaff != nullptr && cleaningStaff->roomNum == roomNum) {
         cleaningStaff = cleaningStaff->prev;
     }
-    AVLtree<Rooms_Val> ::node* current = this->roomsTree.find(roomNum);
-    if(current->value.prev != nullptr)
-        current->value.prev->next = current->value.next;
-    if (current->value.next != nullptr)
-        current->value.next->prev = current->value.prev;
+    Rooms_list_node* list_node_delete = this->roomsTree.find(roomNum)->value.list_node;
+    if(list_node_delete->prev != nullptr)
+        list_node_delete->prev->next = list_node_delete->next;
+    if (list_node_delete->next != nullptr)
+        list_node_delete->next->prev = list_node_delete->prev;
     this->roomsTree.remove(roomNum);
+    delete(list_node_delete);
 }
 
 output_t<int> Rooms_Tree::cleanNextRoom() {

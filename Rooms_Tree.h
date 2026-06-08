@@ -3,11 +3,17 @@
 #include "AVLtree.h"
 #include "wet1util.h"
 #pragma once
+struct Rooms_list_node;
+
 struct Rooms_Val {
+    Rooms_list_node* list_node;
+};
+
+struct Rooms_list_node {
     int roomNum;
     int guestId;
-    Rooms_Val* prev = nullptr;
-    Rooms_Val* next = nullptr;
+    Rooms_list_node* prev = nullptr;
+    Rooms_list_node* next = nullptr;
 };
 
 class Rooms_Tree {
@@ -15,13 +21,15 @@ class Rooms_Tree {
 
 private:
     AVLtree<Rooms_Val> roomsTree;
-    Rooms_Val* cleaningStaff = nullptr;
-    Rooms_Val* minRoom = nullptr;
+    Rooms_list_node* cleaningStaff = nullptr;
+    Rooms_list_node* minRoom = nullptr;
 
 public:
     Rooms_Tree() = default;
 
-    ~Rooms_Tree() = default;
+    ~Rooms_Tree();
+
+    void clearNodes(AVLtree<Rooms_Val>::node* current);
 
     Rooms_Tree(const Rooms_Tree &) = delete; // חוסם בנאי העתקה
 
@@ -33,9 +41,9 @@ public:
 
     output_t<int> cleanNextRoom();
 
-    Rooms_Val* find_next(int roomNnum);
+    Rooms_list_node* find_next(int roomNnum);
 
-    Rooms_Val* find_prev(int roomNnum);
+    Rooms_list_node* find_prev(int roomNnum);
 
     bool contains(int roomNum) const;
 

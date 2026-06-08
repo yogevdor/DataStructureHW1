@@ -118,6 +118,11 @@ StatusType DiningRoom::joinTables(int tableId1, int tableId2) {
     try {
         AVLtree<Guest_Val*>* merged_tables = AVLtree<Guest_Val*>::mergeTrees
                 (&table_1Ptr->value->guestsTree, &table_2Ptr->value->guestsTree);
+        updateTablePointer(table_2Ptr->value->guestsTree.root, table_1Ptr->value);
+        table_1Ptr->value->guestsTree.root = nullptr;
+        table_1Ptr->value->guestsTree.num_node = 0;
+        table_2Ptr->value->guestsTree.root = nullptr;
+        table_2Ptr->value->guestsTree.num_node = 0;
         table_1Ptr->value->guestsTree.takeOwnership(merged_tables);
         table_1Ptr->value->capacity = newCapacity;
     } catch (const std::exception &e) {
@@ -125,7 +130,16 @@ StatusType DiningRoom::joinTables(int tableId1, int tableId2) {
     }
     return removeTable(tableId2);
 }
-
+void DiningRoom::updateTablePointer(AVLtree<Guest_Val*>::node* currentGuest, Dining_Room_Val* newTable) {
+    if (currentGuest == nullptr) {
+        return;
+    }
+    updateTablePointer(currentGuest->leftSon, newTable);
+    if (currentGuest->value != nullptr) {
+        currentGuest->value->diningTable = newTable;
+    }
+    updateTablePointer(currentGuest->rightSon, newTable);
+}
 int DiningRoom::getLastMeal() const {
     //YAARA
     return this->mealId;

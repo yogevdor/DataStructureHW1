@@ -19,7 +19,7 @@ enterDiningRoom: INVALID_INPUT
 leaveDiningRoom: FAILURE
 joinFriend: FAILURE
 checkOut: SUCCESS
-cleanNextRoom: SUCCESS, 53
+cleanNextRoom: SUCCESS, 234
 checkIn: SUCCESS
 cleanNextRoom: SUCCESS, 100
 checkIn: SUCCESS
@@ -38,8 +38,8 @@ checkOut: SUCCESS
 enterDiningRoom: SUCCESS
 joinFriend: FAILURE
 joinFriend: FAILURE
-joinTables: FAILURE
-joinTables: FAILURE
+joinTables: SUCCESS
+joinTables: SUCCESS
 joinTables: INVALID_INPUT
 reheatFood: SUCCESS
 checkOut: FAILURE
@@ -51,7 +51,7 @@ checkIn: SUCCESS
 checkIn: SUCCESS
 addTable: SUCCESS
 checkIn: SUCCESS
-joinFriend: SUCCESS, 45
+joinFriend: SUCCESS, 152
 leaveDiningRoom: FAILURE
 joinFriend: SUCCESS, 45
 joinTables: SUCCESS
@@ -59,25 +59,25 @@ addTable: SUCCESS
 removeTable: SUCCESS
 joinFriend: INVALID_INPUT
 addTable: SUCCESS
-removeTable: SUCCESS
-enterDiningRoom: FAILURE
+removeTable: FAILURE
+enterDiningRoom: SUCCESS
 enterDiningRoom: FAILURE
 cleanNextRoom: SUCCESS, 113
-joinTables: FAILURE
+joinTables: SUCCESS
 addTable: SUCCESS
 checkIn: SUCCESS
 joinFriend: SUCCESS, 45
 checkIn: SUCCESS
-enterDiningRoom: SUCCESS
+enterDiningRoom: FAILURE
 enterDiningRoom: SUCCESS
 removeTable: SUCCESS
-leaveDiningRoom: FAILURE
+leaveDiningRoom: SUCCESS
 checkIn: FAILURE
 addTable: SUCCESS
 addTable: INVALID_INPUT
 enterDiningRoom: FAILURE
 checkIn: SUCCESS
-checkOut: FAILURE
+checkOut: SUCCESS
 enterDiningRoom: SUCCESS
 enterDiningRoom: FAILURE
 addTable: SUCCESS
@@ -96,28 +96,28 @@ checkIn: SUCCESS
 checkIn: SUCCESS
 removeTable: SUCCESS
 checkIn: SUCCESS
-enterDiningRoom: FAILURE
+enterDiningRoom: SUCCESS
 checkOut: SUCCESS
 addTable: SUCCESS
-joinFriend: FAILURE
+joinFriend: SUCCESS, 152
 addTable: SUCCESS
 joinFriend: FAILURE
 joinTables: SUCCESS
 enterDiningRoom: FAILURE
 joinFriend: INVALID_INPUT
-checkIn: FAILURE
 checkIn: SUCCESS
-joinTables: FAILURE
 checkIn: SUCCESS
-enterDiningRoom: FAILURE
+joinTables: SUCCESS
 checkIn: SUCCESS
-joinFriend: FAILURE
+enterDiningRoom: SUCCESS
+checkIn: SUCCESS
+joinFriend: SUCCESS, 152
 removeTable: SUCCESS
 removeTable: FAILURE
 reheatFood: SUCCESS
-enterDiningRoom: FAILURE
+enterDiningRoom: SUCCESS
 cleanNextRoom: SUCCESS, 224
-joinTables: FAILURE
+joinTables: SUCCESS
 checkOut: FAILURE
 checkIn: SUCCESS
 addTable: INVALID_INPUT
@@ -126,125 +126,125 @@ leaveDiningRoom: INVALID_INPUT
 checkIn: FAILURE
 enterDiningRoom: SUCCESS
 leaveDiningRoom: SUCCESS
-leaveDiningRoom: FAILURE
+leaveDiningRoom: SUCCESS
 checkIn: SUCCESS
 joinFriend: FAILURE
 addTable: INVALID_INPUT
 checkIn: SUCCESS
-leaveDiningRoom: FAILURE
+leaveDiningRoom: SUCCESS
 removeTable: FAILURE
 checkIn: SUCCESS
 checkIn: SUCCESS
 removeTable: FAILURE
-joinFriend: SUCCESS, 25
+joinFriend: SUCCESS, 132
 addTable: SUCCESS
 checkOut: SUCCESS
-joinFriend: FAILURE
+joinFriend: SUCCESS, 132
 enterDiningRoom: SUCCESS
 reheatFood: SUCCESS
 cleanNextRoom: SUCCESS, 233
 checkIn: SUCCESS
-enterDiningRoom: FAILURE
+enterDiningRoom: SUCCESS
 checkIn: SUCCESS
 checkIn: SUCCESS
-joinTables: FAILURE
+joinTables: SUCCESS
 checkIn: SUCCESS
 enterDiningRoom: SUCCESS
 checkOut: SUCCESS
-checkIn: FAILURE
-checkOut: FAILURE
-leaveDiningRoom: FAILURE
-leaveDiningRoom: FAILURE
+checkIn: SUCCESS
+checkOut: SUCCESS
+leaveDiningRoom: SUCCESS
+leaveDiningRoom: SUCCESS
 enterDiningRoom: SUCCESS
-enterDiningRoom: FAILURE
+enterDiningRoom: SUCCESS
 addTable: SUCCESS
 checkIn: SUCCESS
 joinFriend: SUCCESS, 45
-checkIn: FAILURE
+checkIn: SUCCESS
 addTable: SUCCESS
-leaveDiningRoom: FAILURE
+leaveDiningRoom: SUCCESS
 addTable: SUCCESS
 checkIn: SUCCESS
 enterDiningRoom: SUCCESS
-leaveDiningRoom: FAILURE
-leaveDiningRoom: FAILURE
+leaveDiningRoom: SUCCESS
+leaveDiningRoom: SUCCESS
 checkIn: SUCCESS
 reheatFood: SUCCESS
-enterDiningRoom: FAILURE
-leaveDiningRoom: FAILURE
-joinFriend: FAILURE
+enterDiningRoom: SUCCESS
+leaveDiningRoom: SUCCESS
+joinFriend: SUCCESS, 132
 checkIn: SUCCESS
 removeTable: SUCCESS
 addTable: SUCCESS
+joinTables: SUCCESS
+removeTable: SUCCESS
+addTable: SUCCESS
+removeTable: SUCCESS
+addTable: SUCCESS
+joinFriend: SUCCESS, 143
+checkIn: SUCCESS
+enterDiningRoom: SUCCESS
+reheatFood: SUCCESS
+enterDiningRoom: SUCCESS
+checkIn: FAILURE
+checkIn: SUCCESS
+leaveDiningRoom: SUCCESS
+removeTable: SUCCESS
+checkIn: SUCCESS
+cleanNextRoom: SUCCESS, 249
+reheatFood: SUCCESS
+addTable: SUCCESS
+reheatFood: SUCCESS
+checkIn: SUCCESS
+removeTable: SUCCESS
+checkIn: SUCCESS
+checkIn: SUCCESS
+checkIn: SUCCESS
+enterDiningRoom: FAILURE
 joinTables: FAILURE
-removeTable: SUCCESS
-addTable: SUCCESS
-removeTable: SUCCESS
-addTable: SUCCESS
-joinFriend: FAILURE
-checkIn: SUCCESS
 enterDiningRoom: SUCCESS
-reheatFood: SUCCESS
 enterDiningRoom: SUCCESS
-checkIn: FAILURE
-checkIn: SUCCESS
 leaveDiningRoom: FAILURE
-removeTable: SUCCESS
-checkIn: SUCCESS
-cleanNextRoom: SUCCESS, 234
-reheatFood: SUCCESS
-addTable: SUCCESS
-reheatFood: SUCCESS
-checkIn: FAILURE
-removeTable: SUCCESS
-checkIn: SUCCESS
-checkIn: SUCCESS
-checkIn: SUCCESS
-enterDiningRoom: FAILURE
-joinTables: FAILURE
+cleanNextRoom: SUCCESS, 22
+leaveDiningRoom: SUCCESS
 enterDiningRoom: SUCCESS
-enterDiningRoom: FAILURE
-leaveDiningRoom: FAILURE
-cleanNextRoom: SUCCESS, 240
-leaveDiningRoom: FAILURE
-enterDiningRoom: FAILURE
 checkOut: FAILURE
 checkOut: SUCCESS
 joinTables: SUCCESS
-addTable: FAILURE
-joinFriend: SUCCESS, 161
-joinFriend: SUCCESS, 161
-joinFriend: FAILURE
-enterDiningRoom: FAILURE
+addTable: SUCCESS
+joinFriend: SUCCESS, 217
+joinFriend: SUCCESS, 217
+joinFriend: SUCCESS, 217
+enterDiningRoom: SUCCESS
 checkIn: SUCCESS
 checkIn: SUCCESS
 checkIn: SUCCESS
 checkIn: SUCCESS
 addTable: SUCCESS
-joinFriend: SUCCESS, 204
+joinFriend: SUCCESS, 217
 checkIn: SUCCESS
 checkIn: SUCCESS
-joinFriend: FAILURE
-leaveDiningRoom: FAILURE
+joinFriend: SUCCESS, 45
+leaveDiningRoom: SUCCESS
 enterDiningRoom: SUCCESS
-cleanNextRoom: SUCCESS, 244
-cleanNextRoom: SUCCESS, 249
+cleanNextRoom: SUCCESS, 28
+cleanNextRoom: SUCCESS, 31
 checkIn: SUCCESS
 addTable: SUCCESS
 checkIn: FAILURE
 checkIn: SUCCESS
-enterDiningRoom: FAILURE
+enterDiningRoom: SUCCESS
 enterDiningRoom: SUCCESS
 addTable: SUCCESS
 addTable: SUCCESS
 checkOut: SUCCESS
 checkOut: SUCCESS
 enterDiningRoom: SUCCESS
-joinFriend: SUCCESS, 132
-checkOut: SUCCESS
+joinFriend: SUCCESS, 217
+checkOut: FAILURE
 joinTables: SUCCESS
 checkIn: SUCCESS
 checkIn: SUCCESS
 enterDiningRoom: SUCCESS
 checkOut: SUCCESS
-checkIn: FAILURE
+checkIn: SUCCESS

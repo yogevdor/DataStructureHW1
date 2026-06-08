@@ -50,8 +50,9 @@ StatusType SegmentationResort::checkOut(int geustId) {
         return StatusType::FAILURE;
     }
     try {
+        int room_num = guests->find(geustId)->value.roomNum;
         guests->remove(geustId);
-        rooms->remove(geustId);
+        rooms->remove(room_num);
     } catch (const std::exception &e) {
         return StatusType::ALLOCATION_ERROR;
     }

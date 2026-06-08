@@ -18,6 +18,19 @@ private:
 
     int num_node = 0; //total nodes
     node* root = nullptr;
+    node* copyNodes(node* source, node* parent) {
+        if (source == nullptr) {
+            return nullptr;
+        }
+        node* newNode = new node();
+        newNode->key = source->key;
+        newNode->value = source->value;
+        newNode->height = source->height;
+        newNode->parent = parent;
+        newNode->leftSon = copyNodes(source->leftSon, newNode);
+        newNode->rightSon = copyNodes(source->rightSon, newNode);
+        return newNode;
+    }
 
 public:
     AVLtree() = default;
@@ -26,19 +39,18 @@ public:
         this->clearTree(root);
     }
 
-    AVLtree(const AVLtree &) = delete; // חוסם בנאי העתקה
+    AVLtree(const AVLtree &t) : num_node(t.num_node) {
+        this->root = copyNodes(t.root, nullptr);
+    }
 
     AVLtree &operator=(const AVLtree &t) {
         if (this == &t) {
             return *this;
         }
-        AVLtree<T> temp(t);
-        node* temp_root = this->root;
-        this->root = temp.root;
-        temp.root = temp_root;
-        int temp_num = this->num_node;
-        this->num_node = temp.num_node;
-        temp.num_node = temp_num;
+        node* newRoot = copyNodes(t.root, nullptr);
+        clearTree(this->root);
+        this->root = newRoot;
+        this->num_node = t.num_node;
         return *this;
     }
 
@@ -211,10 +223,20 @@ public:
         AVLtree<T>* newTree = nullptr;
         try {
             newTree = new AVLtree<T>();
-            if (size2 == 0)
+            if (size2 == 0 && size1 == 0) {
                 return newTree;
-            if (size1 == 0)
+            }
+            if (size2 == 0) {
+                newTree->root = tree1->root;
+                newTree->num_node = tree1->num_node;
                 return newTree;
+            }
+            if (size1 == 0) {
+                newTree->root = tree2->root;
+                newTree->num_node = tree2->num_node;
+
+                return newTree;
+            }
             tree1_arr = new node*[size1];
             tree1->inOrderToArray(tree1_arr);
             tree2_arr = new node*[size2];
@@ -223,10 +245,7 @@ public:
             merge_sort(tree1_arr, size1, tree2_arr, size2, newTree_arr);
             newTree->root = fill_from_arr(newTree_arr, 0, size1 + size2 - 1, newTree->root);
             newTree->num_node = size1 + size2;
-            tree1->root = nullptr;
-            tree1->num_node = 0;
-            tree2->root = nullptr;
-            tree2->num_node = 0;
+
         } catch (const std::exception &e) {
             delete[] tree1_arr;
             delete[] tree2_arr;
@@ -234,6 +253,9 @@ public:
             delete newTree;
             throw;
         }
+        delete[] tree1_arr;
+        delete[] tree2_arr;
+        delete[] newTree_arr;
         return newTree;
     }
 
