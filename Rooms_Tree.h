@@ -2,7 +2,7 @@
 #define ROOMS_TREE_H
 #include "AVLtree.h"
 #include "wet1util.h"
-
+#pragma once
 struct Rooms_Val {
     int roomNum;
     int guestId;

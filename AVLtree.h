@@ -1,5 +1,5 @@
 #include "wet1util.h"
-
+#pragma once
 template<class T>
 class AVLtree {
     friend class Rooms_Tree;

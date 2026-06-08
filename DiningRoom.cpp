@@ -81,11 +81,11 @@ StatusType DiningRoom::leaveDiningRoom(int guestId, int tableId) {
         return StatusType::FAILURE;
     }
 
-    auto guestPtr = tablePtr->value->guestsTree.find(guestId);
+    auto guestPtr = tablePtr->value->guestsTree.find(guestId)->value;
     try {
         tablePtr->value->guestsTree.remove(guestId);
-        guestPtr->value->diningTable = nullptr;
-        guestPtr->value->lastMeal = this->mealCount;
+        guestPtr->diningTable = nullptr;
+        guestPtr->lastMeal = this->mealId;
     } catch (const std::exception &e) {
         return StatusType::ALLOCATION_ERROR;
     }
@@ -94,7 +94,7 @@ StatusType DiningRoom::leaveDiningRoom(int guestId, int tableId) {
 
 StatusType DiningRoom::reheatFood() {
     //YAARA
-    this->mealCount++;
+    this->mealId++;
     return StatusType::SUCCESS;
 }
 
@@ -128,7 +128,7 @@ StatusType DiningRoom::joinTables(int tableId1, int tableId2) {
 
 int DiningRoom::getLastMeal() const {
     //YAARA
-    return this->mealCount;
+    return this->mealId;
 }
 
 bool DiningRoom::contains(int tableId) {

@@ -2,7 +2,7 @@
 #define GUESTS_TREE_H
 #include "AVLtree.h"
 #include "wet1util.h"
-
+#pragma once
 struct Dining_Room_Val;
 class DiningRoom;
 

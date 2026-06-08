@@ -1,0 +1,9 @@
+addTable: SUCCESS
+checkIn: SUCCESS
+checkIn: SUCCESS
+joinFriend: FAILURE
+checkIn: SUCCESS
+checkIn: SUCCESS
+checkIn: SUCCESS
+enterDiningRoom: SUCCESS
+enterDiningRoom: SUCCESS

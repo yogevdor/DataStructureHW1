@@ -2,7 +2,7 @@
 #define DININGROOM_TREE_H
 #include "AVLtree.h"
 #include "wet1util.h"
-
+#pragma once
 class Guests_Tree;
 struct Guest_Val;
 
@@ -17,7 +17,7 @@ class DiningRoom {
 
 private:
     AVLtree<Dining_Room_Val*> tablesTree;
-    int mealCount;
+    int mealId = 1;
 
 public:
     DiningRoom() = default;
