@@ -100,27 +100,26 @@ StatusType DiningRoom::reheatFood() {
 
 StatusType DiningRoom::joinTables(int tableId1, int tableId2) {
     //YAARA
-    if (tableId1 <= 0 || tableId2 <= 0)
+    if (tableId1 <= 0 || tableId2 <= 0 || tableId1 == tableId2) {
         return StatusType::INVALID_INPUT;
-    if (tableId1 == tableId2)
-        return StatusType::INVALID_INPUT;
-
-    Dining_Room_Val** table_1Ptr = this->tablesTree.find(tableId1);
-    if (table_1Ptr == nullptr) //no such table
+    }
+    auto table_1Ptr = this->tablesTree.find(tableId1);
+    if (table_1Ptr == nullptr) {
+        //no such table
         return StatusType::FAILURE;
-    Dining_Room_Val** table_2Ptr = this->tablesTree.find(tableId2);
-    if (table_2Ptr == nullptr) //no such table
+    }
+    auto table_2Ptr = this->tablesTree.find(tableId2);
+    if (table_2Ptr == nullptr) {
+        //no such table
         return StatusType::FAILURE;
+    }
 
-    Dining_Room_Val* table_1 = *table_1Ptr;
-    Dining_Room_Val* table_2 = *table_2Ptr;
-    int newCapacity = table_1->capacity + table_2->capacity;
+    int newCapacity = table_1Ptr->value->capacity + table_2Ptr->value->capacity;
     try {
-        AVLtree<Guest_Val*>* merged_tables = AVLtree<Guest_Val
-            *>::mergeTrees(&(table_1->guestsTree), &(table_2->guestsTree));
-        table_1->guestsTree.takeOwnership(*merged_tables); //here we have a problem
-        table_1->capacity = newCapacity;
-        delete merged_tables;
+        AVLtree<Guest_Val*>* merged_tables = AVLtree<Guest_Val*>::mergeTrees
+                (&table_1Ptr->value->guestsTree, &table_2Ptr->value->guestsTree);
+        table_1Ptr->value->guestsTree.takeOwnership(merged_tables);
+        table_1Ptr->value->capacity = newCapacity;
     } catch (const std::exception &e) {
         return StatusType::ALLOCATION_ERROR;
     }

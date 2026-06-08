@@ -4,6 +4,7 @@ template<class T>
 class AVLtree {
     friend class Rooms_Tree;
     friend class Guests_Tree;
+    friend class DiningRoom;
 
 private:
     struct node {
@@ -240,10 +241,10 @@ public:
     }
 
     void takeOwnership(AVLtree<T>* otherTree) {
-        if (otherTree == nullptr) {
+        if (otherTree == nullptr || otherTree == this) {
             return;
         }
-        this->clearTree();
+        this->clearTree(this->root);
         this->root = otherTree->root;
         this->num_node = otherTree->num_node;
         otherTree->root = nullptr;
