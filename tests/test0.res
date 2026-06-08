@@ -6,5 +6,5 @@ enterDiningRoom: FAILURE
 checkIn: SUCCESS
 reheatFood: SUCCESS
 checkIn: SUCCESS
-joinFriend: FAILURE
+joinFriend: SUCCESS, 7
 leaveDiningRoom: SUCCESS

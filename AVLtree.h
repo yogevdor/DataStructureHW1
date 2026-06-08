@@ -335,6 +335,15 @@ private:
             c->parent = v;
         v->parent = b;
         b->parent = original_parent;
+        if (original_parent != nullptr) {
+            if (original_parent->leftSon == v) {
+                original_parent->leftSon = b;
+            } else {
+                original_parent->rightSon = b;
+            }
+        } else {
+            root = b;
+        }
         int v_left_height;
         if (c != nullptr) {
             v_left_height = c->height;
