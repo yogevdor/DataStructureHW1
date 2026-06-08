@@ -74,21 +74,18 @@ StatusType DiningRoom::leaveDiningRoom(int guestId, int tableId) {
     if (guestId <= 0 || tableId <= 0)
         return StatusType::INVALID_INPUT;
 
-    Dining_Room_Val** tablePtr = this->tablesTree.find(tableId);
+    auto tablePtr = tablesTree.find(tableId);
     if (tablePtr == nullptr) //no such table
         return StatusType::FAILURE;
-
-    Dining_Room_Val* current_table = *tablePtr;
-    Guest_Val** current_guest = current_table->guestsTree.find(guestId);
-    if (current_guest == nullptr) //no such guest in table
+    if (!tablePtr->value->guestsTree.contains(guestId)) {
         return StatusType::FAILURE;
+    }
 
-    Guest_Val* actual_guest = *current_guest;
+    auto guestPtr = tablePtr->value->guestsTree.find(guestId);
     try {
-        current_table->guestsTree.remove(guestId);
-        actual_guest->diningTable = nullptr;
-        actual_guest->lastMeal = this->mealCount;
-        actual_guest->table_index = -1;
+        tablePtr->value->guestsTree.remove(guestId);
+        guestPtr->value->diningTable = nullptr;
+        guestPtr->value->lastMeal = this->mealCount;
     } catch (const std::exception &e) {
         return StatusType::ALLOCATION_ERROR;
     }
