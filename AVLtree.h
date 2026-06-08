@@ -198,9 +198,6 @@ public:
         return find(key) != nullptr;
     }
 
-    //return pointer to the value with min key
-    //T* getMin(); //DOR
-
     int getNumNodes() const {
         return num_node;
     }
@@ -249,6 +246,26 @@ public:
         this->num_node = otherTree->num_node;
         otherTree->root = nullptr;
         otherTree->num_node = 0;
+    }
+
+    node* nextBiggerNode(node* current) {
+        if (current == nullptr) {
+            return nullptr;
+        }
+        if (current->rightSon != nullptr) {
+            node* temp = current->rightSon;
+            while (temp->leftSon != nullptr) {
+                temp = temp->leftSon;
+            }
+            return temp;
+        }
+        node* parent = current->parent;
+        node* temp = current;
+        while (parent != nullptr && temp == parent->rightSon) {
+            temp = parent;
+            parent = parent->parent;
+        }
+        return parent;
     }
 
 private:

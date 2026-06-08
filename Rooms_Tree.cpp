@@ -21,6 +21,9 @@ void Rooms_Tree::remove(int roomNum) {
     if (minRoom != nullptr && minRoom->key == roomNum) {
         minRoom = this->findMin();
     }
+    if (cleaningStaff->key == roomNum) {
+        cleaningStaff =
+    }
     this->roomsTree.remove(roomNum);
     if (this->roomsTree.num_node == 0) {
         minRoom = nullptr;
@@ -31,9 +34,8 @@ output_t<int> Rooms_Tree::cleanNextRoom() {
     //YAARA
     if (this->roomsTree.num_node == 0)
         return StatusType::FAILURE;
-    if (this->cleaningStaff->leftSon != nullptr)
-        this->cleaningStaff = this->cleaningStaff->leftSon;
-    this->cleaningStaff = this->minRoom;
+
+    //contiune after nextbiggernode
     return this->cleaningStaff->key;
 }
 
