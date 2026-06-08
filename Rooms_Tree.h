@@ -6,6 +6,8 @@
 struct Rooms_Val {
     int roomNum;
     int guestId;
+    Rooms_Val* prev = nullptr;
+    Rooms_Val* next = nullptr;
 };
 
 class Rooms_Tree {
@@ -13,8 +15,8 @@ class Rooms_Tree {
 
 private:
     AVLtree<Rooms_Val> roomsTree;
-    AVLtree<Rooms_Val>::node* cleaningStaff = nullptr;
-    AVLtree<Rooms_Val>::node* minRoom = nullptr;
+    Rooms_Val* cleaningStaff = nullptr;
+    Rooms_Val* minRoom = nullptr;
 
 public:
     Rooms_Tree() = default;
@@ -30,6 +32,10 @@ public:
     void remove(int roomNum);
 
     output_t<int> cleanNextRoom();
+
+    Rooms_Val* find_next(int roomNnum);
+
+    Rooms_Val* find_prev(int roomNnum);
 
     bool contains(int roomNum) const;
 
