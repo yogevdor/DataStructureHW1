@@ -40,32 +40,42 @@ void Guests_Tree::remove(int guestId) {
 }*/
 
 output_t<int> Guests_Tree::joinFriend(int guestId1, int guestId2, DiningRoom &dining_room) {
-    if (guestId1 <= 0 || guestId2 <= 0)
+    if (guestId1 <= 0 || guestId2 <= 0 || guestId1 == guestId2)
         return StatusType::INVALID_INPUT;
-    if (guestId1 == guestId2)
-        return StatusType::INVALID_INPUT;
-    Guest_Val* guest_in = this->guestsTree.find(guestId2);
-    if (guest_in == nullptr) //no such guest
+    auto guest_in = this->guestsTree.find(guestId2);
+    if (guest_in == nullptr) {
+        //no such guest
         return StatusType::FAILURE;
-    if (guest_in->diningTable == nullptr) //not in dining room
+    }
+    if (guest_in->value.diningTable == nullptr) {
+        //not in dining room
         return StatusType::FAILURE;
-    Dining_Room_Val* current_table = guest_in->diningTable;
-    if (current_table->guestsTree.getNumNodes() == current_table->capacity) //table is full
+    }
+    auto current_table = guest_in->value.diningTable;
+    if (current_table->guestsTree.getNumNodes() == current_table->capacity) {
+        //table is full
         return StatusType::FAILURE;
-    Guest_Val* guest_want_in = this->guestsTree.find(guestId1);
-    if (guest_want_in == nullptr) //no such guest
+    }
+    auto guest_want_in = this->guestsTree.find(guestId1);
+    if (guest_want_in == nullptr) {
+        //no such guest
         return StatusType::FAILURE;
-    if (guest_want_in->lastMeal == dining_room.getLastMeal()) //was in this meal
+    }
+    if (guest_want_in->value.lastMeal == dining_room.getLastMeal()) {
+        //was in this meal
         return StatusType::FAILURE;
-    if (guest_want_in->diningTable != nullptr) //NOW in this meal
+    }
+    if (guest_want_in->value.diningTable != nullptr) {
+        //NOW in this meal
         return StatusType::FAILURE;
+    }
     try {
-        current_table->guestsTree.insert(guestId1, guest_want_in);
-        guest_want_in->diningTable = current_table;
+        current_table->guestsTree.insert(guestId1, &guest_want_in->value);
+        guest_want_in->value.diningTable = current_table;
     } catch (const std::exception &e) {
         return StatusType::ALLOCATION_ERROR;
     }
-    return guest_in->diningTable->tableId;
+    return guest_in->value.diningTable->tableId;
 }
 
 bool Guests_Tree::contains(int guestId) const {
