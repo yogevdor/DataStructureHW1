@@ -8,13 +8,12 @@ StatusType DiningRoom::addTable(int tableId, int capacity) {
     if (tablesTree.contains(tableId)) {
         return StatusType::FAILURE;
     }
-    auto* val = new Dining_Room_Val();
+    auto val = new Dining_Room_Val();
     val->capacity = capacity;
     val->tableId = tableId;
     try {
         tablesTree.insert(tableId, val);
     } catch (const std::exception &e) {
-        delete val;
         return StatusType::ALLOCATION_ERROR;
     }
     return StatusType::SUCCESS;
@@ -46,9 +45,9 @@ StatusType DiningRoom::enterDiningRoom(int guestId, int tableId, const Guests_Tr
     auto current_guest = guests->find(guestId);
     if (current_guest == nullptr) //no such guest
         return StatusType::FAILURE;
-    if (current_guest->value.diningTable != nullptr) //in dining room
+    if (current_guest->value->diningTable != nullptr) //in dining room
         return StatusType::FAILURE;
-    if (current_guest->value.lastMeal == this->getLastMeal()) //was in this meal
+    if (current_guest->value->lastMeal == this->getLastMeal()) //was in this meal
         return StatusType::FAILURE;
 
     auto current_tablePtr = tablesTree.find(tableId);
@@ -61,8 +60,8 @@ StatusType DiningRoom::enterDiningRoom(int guestId, int tableId, const Guests_Tr
         return StatusType::FAILURE;
     }
     try {
-        current_tablePtr->value->guestsTree.insert(guestId, &current_guest->value);
-        current_guest->value.diningTable = current_tablePtr->value;
+        current_tablePtr->value->guestsTree.insert(guestId, current_guest->value);
+        current_guest->value->diningTable = current_tablePtr->value;
     } catch (const std::exception &e) {
         return StatusType::ALLOCATION_ERROR;
     }
@@ -116,9 +115,9 @@ StatusType DiningRoom::joinTables(int tableId1, int tableId2) {
 
     int newCapacity = table_1Ptr->value->capacity + table_2Ptr->value->capacity;
     try {
+        updateTablePointer(table_2Ptr->value->guestsTree.root, table_1Ptr->value);
         AVLtree<Guest_Val*>* merged_tables = AVLtree<Guest_Val*>::mergeTrees
                 (&table_1Ptr->value->guestsTree, &table_2Ptr->value->guestsTree);
-        updateTablePointer(table_2Ptr->value->guestsTree.root, table_1Ptr->value);
         table_1Ptr->value->guestsTree.root = nullptr;
         table_1Ptr->value->guestsTree.num_node = 0;
         table_2Ptr->value->guestsTree.root = nullptr;
@@ -130,7 +129,9 @@ StatusType DiningRoom::joinTables(int tableId1, int tableId2) {
     }
     return removeTable(tableId2);
 }
-void DiningRoom::updateTablePointer(AVLtree<Guest_Val*>::node* currentGuest, Dining_Room_Val* newTable) {
+
+void DiningRoom::updateTablePointer(AVLtree<Guest_Val*>::node* currentGuest,
+                                    Dining_Room_Val* newTable) {
     if (currentGuest == nullptr) {
         return;
     }
@@ -140,6 +141,7 @@ void DiningRoom::updateTablePointer(AVLtree<Guest_Val*>::node* currentGuest, Din
     }
     updateTablePointer(currentGuest->rightSon, newTable);
 }
+
 int DiningRoom::getLastMeal() const {
     //YAARA
     return this->mealId;

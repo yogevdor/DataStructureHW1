@@ -45,12 +45,12 @@ StatusType SegmentationResort::checkOut(int geustId) {
         return StatusType::INVALID_INPUT;
     }
 
-    if (!guests->contains(geustId) || guests->guestsTree.find(geustId)->value.diningTable
+    if (!guests->contains(geustId) || guests->guestsTree.find(geustId)->value->diningTable
         != nullptr) {
         return StatusType::FAILURE;
     }
     try {
-        int room_num = guests->find(geustId)->value.roomNum;
+        int room_num = guests->find(geustId)->value->roomNum;
         guests->remove(geustId);
         rooms->remove(room_num);
     } catch (const std::exception &e) {

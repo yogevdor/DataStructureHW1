@@ -53,7 +53,7 @@ addTable: SUCCESS
 checkIn: SUCCESS
 joinFriend: SUCCESS, 152
 leaveDiningRoom: FAILURE
-joinFriend: SUCCESS, 45
+joinFriend: SUCCESS, 152
 joinTables: SUCCESS
 addTable: SUCCESS
 removeTable: SUCCESS
@@ -66,7 +66,7 @@ cleanNextRoom: SUCCESS, 113
 joinTables: SUCCESS
 addTable: SUCCESS
 checkIn: SUCCESS
-joinFriend: SUCCESS, 45
+joinFriend: SUCCESS, 152
 checkIn: SUCCESS
 enterDiningRoom: FAILURE
 enterDiningRoom: SUCCESS
@@ -159,7 +159,7 @@ enterDiningRoom: SUCCESS
 enterDiningRoom: SUCCESS
 addTable: SUCCESS
 checkIn: SUCCESS
-joinFriend: SUCCESS, 45
+joinFriend: SUCCESS, 132
 checkIn: SUCCESS
 addTable: SUCCESS
 leaveDiningRoom: SUCCESS
@@ -200,15 +200,15 @@ removeTable: SUCCESS
 checkIn: SUCCESS
 checkIn: SUCCESS
 checkIn: SUCCESS
-enterDiningRoom: FAILURE
-joinTables: FAILURE
 enterDiningRoom: SUCCESS
+joinTables: FAILURE
+enterDiningRoom: FAILURE
 enterDiningRoom: SUCCESS
 leaveDiningRoom: FAILURE
 cleanNextRoom: SUCCESS, 22
 leaveDiningRoom: SUCCESS
 enterDiningRoom: SUCCESS
-checkOut: FAILURE
+checkOut: SUCCESS
 checkOut: SUCCESS
 joinTables: SUCCESS
 addTable: SUCCESS
@@ -224,7 +224,7 @@ addTable: SUCCESS
 joinFriend: SUCCESS, 217
 checkIn: SUCCESS
 checkIn: SUCCESS
-joinFriend: SUCCESS, 45
+joinFriend: SUCCESS, 217
 leaveDiningRoom: SUCCESS
 enterDiningRoom: SUCCESS
 cleanNextRoom: SUCCESS, 28

@@ -17,13 +17,15 @@ class Guests_Tree {
     friend class DiningRoom;
 
 private:
-    AVLtree<Guest_Val> guestsTree;
+    AVLtree<Guest_Val*> guestsTree;
     AVLtree<int> roomsTree;
+
+    void clearGuestsMemory(AVLtree<Guest_Val*>::node* current);
 
 public:
     Guests_Tree() = default;
 
-    ~Guests_Tree() = default;
+    ~Guests_Tree();
 
     Guests_Tree(const Guests_Tree &) = delete; // חוסם בנאי העתקה
 
@@ -37,7 +39,7 @@ public:
 
     bool contains(int guestId) const;
 
-    AVLtree<Guest_Val>::node* find(int guestId) const;
+    AVLtree<Guest_Val*>::node* find(int guestId) const;
 
     //StatusType enterDiningRoom(int guestId, int tableId, DiningRoom& dining_room);
 };

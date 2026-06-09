@@ -18,19 +18,6 @@ private:
 
     int num_node = 0; //total nodes
     node* root = nullptr;
-    node* copyNodes(node* source, node* parent) {
-        if (source == nullptr) {
-            return nullptr;
-        }
-        node* newNode = new node();
-        newNode->key = source->key;
-        newNode->value = source->value;
-        newNode->height = source->height;
-        newNode->parent = parent;
-        newNode->leftSon = copyNodes(source->leftSon, newNode);
-        newNode->rightSon = copyNodes(source->rightSon, newNode);
-        return newNode;
-    }
 
 public:
     AVLtree() = default;
@@ -245,7 +232,6 @@ public:
             merge_sort(tree1_arr, size1, tree2_arr, size2, newTree_arr);
             newTree->root = fill_from_arr(newTree_arr, 0, size1 + size2 - 1, newTree->root);
             newTree->num_node = size1 + size2;
-
         } catch (const std::exception &e) {
             delete[] tree1_arr;
             delete[] tree2_arr;
@@ -521,5 +507,19 @@ private:
             return 0;
         }
         return getHeight(node->leftSon) - getHeight(node->rightSon);
+    }
+
+    node* copyNodes(node* source, node* parent) {
+        if (source == nullptr) {
+            return nullptr;
+        }
+        node* newNode = new node();
+        newNode->key = source->key;
+        newNode->value = source->value;
+        newNode->height = source->height;
+        newNode->parent = parent;
+        newNode->leftSon = copyNodes(source->leftSon, newNode);
+        newNode->rightSon = copyNodes(source->rightSon, newNode);
+        return newNode;
     }
 };

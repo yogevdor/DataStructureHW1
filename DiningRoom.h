@@ -18,7 +18,9 @@ class DiningRoom {
 private:
     AVLtree<Dining_Room_Val*> tablesTree;
     int mealId = 1;
-    void updateTablePointer(AVLtree<Guest_Val*>::node* currentGuest, Dining_Room_Val* newTable);
+
+    void updateTablePointer(AVLtree<Guest_Val*>::node* currentGuest,
+                            Dining_Room_Val* newTable);
 
 public:
     DiningRoom() = default;
