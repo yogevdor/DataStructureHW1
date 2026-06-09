@@ -3,7 +3,6 @@
 **/mtm_pirate
 **/Mvidia
 **/MvidiaTest
-**/*.out
 **/test_results.html
 cmake-build-debug/
 .idea/
