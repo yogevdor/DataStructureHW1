@@ -22,10 +22,12 @@ private:
     void updateTablePointer(AVLtree<Guest_Val*>::node* currentGuest,
                             Dining_Room_Val* newTable);
 
+    void clearTables(AVLtree<Dining_Room_Val*>::node* n);
+
 public:
     DiningRoom() = default;
 
-    ~DiningRoom() = default;
+    ~DiningRoom();
 
     DiningRoom(const DiningRoom &) = delete; // חוסם בנאי העתקה
 

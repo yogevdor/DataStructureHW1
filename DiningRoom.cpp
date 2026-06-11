@@ -1,6 +1,10 @@
 #include "DiningRoom.h"
 #include "Guests_Tree.h"
 
+DiningRoom::~DiningRoom() {
+    clearTables(tablesTree.root);
+}
+
 StatusType DiningRoom::addTable(int tableId, int capacity) {
     if (tableId <= 0 || capacity <= 0) {
         return StatusType::INVALID_INPUT;
@@ -140,6 +144,13 @@ void DiningRoom::updateTablePointer(AVLtree<Guest_Val*>::node* currentGuest,
         currentGuest->value->diningTable = newTable;
     }
     updateTablePointer(currentGuest->rightSon, newTable);
+}
+
+void DiningRoom::clearTables(AVLtree<Dining_Room_Val*>::node* n) {
+    if (n == nullptr) return;
+    clearTables(n->leftSon);
+    clearTables(n->rightSon);
+    delete n->value;
 }
 
 int DiningRoom::getLastMeal() const {
