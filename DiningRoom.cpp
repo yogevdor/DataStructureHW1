@@ -34,11 +34,13 @@ StatusType DiningRoom::removeTable(int tableId) {
     if (tablePtr->value->guestsTree.getNumNodes() > 0) {
         return StatusType::FAILURE;
     }
+    Dining_Room_Val* toRemove = tablePtr->value;
     try {
         tablesTree.remove(tableId);
     } catch (const std::exception &e) {
         return StatusType::ALLOCATION_ERROR;
     }
+    delete toRemove;
     return StatusType::SUCCESS;
 }
 
