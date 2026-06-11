@@ -1,0 +1,12 @@
+checkIn 1 10
+checkIn 2 20
+cleanNextRoom
+cleanNextRoom
+cleanNextRoom
+cleanNextRoom
+cleanNextRoom
+checkOut 2
+cleanNextRoom
+cleanNextRoom
+checkOut 1
+cleanNextRoom

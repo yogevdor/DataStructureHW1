@@ -1,0 +1,14 @@
+checkIn: SUCCESS
+checkIn: SUCCESS
+addTable: SUCCESS
+reheatFood: SUCCESS
+enterDiningRoom: SUCCESS
+leaveDiningRoom: SUCCESS
+checkOut: SUCCESS
+checkOut: SUCCESS
+cleanNextRoom: FAILURE
+enterDiningRoom: FAILURE
+leaveDiningRoom: FAILURE
+joinFriend: FAILURE
+joinTables: FAILURE
+removeTable: SUCCESS

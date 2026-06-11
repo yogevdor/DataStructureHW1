@@ -1,0 +1,23 @@
+checkIn: SUCCESS
+checkIn: SUCCESS
+checkIn: SUCCESS
+checkIn: SUCCESS
+addTable: SUCCESS
+addTable: SUCCESS
+reheatFood: SUCCESS
+enterDiningRoom: SUCCESS
+enterDiningRoom: SUCCESS
+joinTables: SUCCESS
+joinFriend: SUCCESS, 1
+joinFriend: FAILURE
+joinFriend: SUCCESS, 1
+joinFriend: FAILURE
+leaveDiningRoom: SUCCESS
+leaveDiningRoom: SUCCESS
+leaveDiningRoom: SUCCESS
+leaveDiningRoom: SUCCESS
+reheatFood: SUCCESS
+joinFriend: FAILURE
+enterDiningRoom: SUCCESS
+joinFriend: SUCCESS, 1
+leaveDiningRoom: SUCCESS

@@ -1,0 +1,39 @@
+checkIn 1 10
+checkIn 2 20
+checkIn 3 30
+checkIn 4 40
+checkIn 5 50
+addTable 10 2
+addTable 20 2
+addTable 30 1
+joinTables 10 99
+joinTables 99 10
+joinTables 99 98
+joinFriend 1 2
+enterDiningRoom 2 10
+joinFriend 1 2
+joinFriend 3 2
+leaveDiningRoom 1 10
+joinFriend 1 2
+reheatFood
+joinFriend 1 2
+leaveDiningRoom 1 10
+joinTables 10 20
+removeTable 20
+reheatFood
+enterDiningRoom 3 10
+enterDiningRoom 4 10
+enterDiningRoom 5 10
+joinFriend 1 2
+enterDiningRoom 1 30
+leaveDiningRoom 1 30
+leaveDiningRoom 5 10
+joinTables 10 30
+removeTable 30
+reheatFood
+enterDiningRoom 1 10
+joinFriend 5 1
+joinFriend 1 1
+joinFriend 99 2
+leaveDiningRoom 1 10
+joinFriend 1 5

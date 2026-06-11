@@ -1,0 +1,32 @@
+checkIn: SUCCESS
+checkIn: SUCCESS
+checkIn: SUCCESS
+checkIn: SUCCESS
+addTable: SUCCESS
+addTable: SUCCESS
+addTable: SUCCESS
+reheatFood: SUCCESS
+enterDiningRoom: SUCCESS
+enterDiningRoom: SUCCESS
+enterDiningRoom: SUCCESS
+joinTables: SUCCESS
+leaveDiningRoom: FAILURE
+leaveDiningRoom: SUCCESS
+leaveDiningRoom: SUCCESS
+leaveDiningRoom: SUCCESS
+joinTables: SUCCESS
+reheatFood: SUCCESS
+cleanNextRoom: SUCCESS, 10
+cleanNextRoom: SUCCESS, 20
+cleanNextRoom: SUCCESS, 30
+cleanNextRoom: SUCCESS, 40
+enterDiningRoom: SUCCESS
+enterDiningRoom: SUCCESS
+enterDiningRoom: SUCCESS
+enterDiningRoom: SUCCESS
+enterDiningRoom: FAILURE
+leaveDiningRoom: SUCCESS
+leaveDiningRoom: SUCCESS
+leaveDiningRoom: SUCCESS
+leaveDiningRoom: SUCCESS
+removeTable: SUCCESS

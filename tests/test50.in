@@ -1,0 +1,33 @@
+checkIn 0 5
+checkIn -1 5
+checkIn 1 0
+checkIn 1 -3
+checkOut 0
+checkOut -7
+addTable 0 3
+addTable -5 3
+addTable 1 0
+addTable 1 -2
+removeTable 0
+removeTable -9
+enterDiningRoom 0 1
+enterDiningRoom -3 1
+enterDiningRoom 1 0
+enterDiningRoom 1 -4
+leaveDiningRoom 0 1
+leaveDiningRoom -2 1
+leaveDiningRoom 1 0
+leaveDiningRoom 1 -6
+joinTables 0 1
+joinTables -1 1
+joinTables 1 0
+joinTables 1 -1
+joinTables 0 0
+joinTables 3 3
+joinFriend 0 1
+joinFriend -4 1
+joinFriend 1 0
+joinFriend 1 -1
+joinFriend 0 0
+joinFriend 7 7
+cleanNextRoom

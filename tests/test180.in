@@ -1,0 +1,18 @@
+reheatFood
+reheatFood
+cleanNextRoom
+checkOut 1
+enterDiningRoom 1 1
+leaveDiningRoom 1 1
+joinFriend 1 2
+joinTables 1 2
+removeTable 1
+checkIn 1 10
+checkOut 1
+checkIn 1 10
+addTable 1 2
+enterDiningRoom 1 1
+leaveDiningRoom 1 1
+enterDiningRoom 1 1
+reheatFood
+enterDiningRoom 1 1

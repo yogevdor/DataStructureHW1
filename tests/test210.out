@@ -1,0 +1,18 @@
+checkIn: SUCCESS
+checkIn: SUCCESS
+checkIn: SUCCESS
+cleanNextRoom: SUCCESS, 10
+cleanNextRoom: SUCCESS, 20
+cleanNextRoom: SUCCESS, 30
+checkIn: SUCCESS
+cleanNextRoom: SUCCESS, 40
+cleanNextRoom: SUCCESS, 10
+cleanNextRoom: SUCCESS, 20
+cleanNextRoom: SUCCESS, 30
+cleanNextRoom: SUCCESS, 40
+checkOut: SUCCESS
+cleanNextRoom: SUCCESS, 10
+checkOut: SUCCESS
+checkOut: SUCCESS
+checkOut: SUCCESS
+cleanNextRoom: FAILURE

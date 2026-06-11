@@ -1,0 +1,27 @@
+checkIn 1 10
+checkIn 2 20
+checkOut 1
+checkIn 3 10
+checkIn 4 30
+addTable 1 2
+addTable 2 2
+reheatFood
+enterDiningRoom 2 1
+enterDiningRoom 3 1
+enterDiningRoom 4 2
+enterDiningRoom 2 2
+enterDiningRoom 2 1
+leaveDiningRoom 3 1
+enterDiningRoom 4 1
+leaveDiningRoom 2 1
+leaveDiningRoom 4 1
+leaveDiningRoom 4 2
+reheatFood
+enterDiningRoom 2 1
+enterDiningRoom 3 1
+enterDiningRoom 4 1
+cleanNextRoom
+cleanNextRoom
+checkOut 3
+cleanNextRoom
+cleanNextRoom
