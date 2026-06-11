@@ -45,7 +45,7 @@ StatusType SegmentationResort::checkOut(int geustId) {
         return StatusType::INVALID_INPUT;
     }
 
-    if (!guests->contains(geustId) || guests->guestsTree.find(geustId)->value->diningTable
+    if (!guests->contains(geustId) || guests->find(geustId)->value->diningTable
         != nullptr) {
         return StatusType::FAILURE;
     }

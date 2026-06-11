@@ -1,8 +1,7 @@
-#ifndef ROOMS_TREE_H
-#define ROOMS_TREE_H
+#pragma once
 #include "AVLtree.h"
 #include "wet1util.h"
-#pragma once
+
 struct Rooms_list_node;
 
 struct Rooms_Val {
@@ -46,8 +45,4 @@ public:
     Rooms_list_node* find_prev(int roomNnum);
 
     bool contains(int roomNum) const;
-
-    AVLtree<Rooms_Val>::node* findMin() const;
 };
-
-#endif //ROOMS_TREE_H

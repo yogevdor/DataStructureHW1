@@ -278,13 +278,13 @@ public:
     }
 
 private:
-    void clearTree(node* node) {
-        if (node == nullptr) {
+    void clearTree(node* v) {
+        if (v == nullptr) {
             return;
         }
-        clearTree(node->leftSon);
-        clearTree(node->rightSon);
-        delete node;
+        clearTree(v->leftSon);
+        clearTree(v->rightSon);
+        delete v;
     }
 
     node* rotateRL(node* v) {
@@ -496,18 +496,18 @@ private:
         }
     }
 
-    int getHeight(node* node) const {
-        if (node == nullptr) {
+    int getHeight(node* v) const {
+        if (v == nullptr) {
             return -1;
         }
-        return node->height;
+        return v->height;
     }
 
-    int getBF(node* node) const {
-        if (node == nullptr) {
+    int getBF(node* v) const {
+        if (v == nullptr) {
             return 0;
         }
-        return getHeight(node->leftSon) - getHeight(node->rightSon);
+        return getHeight(v->leftSon) - getHeight(v->rightSon);
     }
 
     node* copyNodes(node* source, node* parent) {

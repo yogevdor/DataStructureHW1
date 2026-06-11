@@ -96,15 +96,3 @@ output_t<int> Rooms_Tree::cleanNextRoom() {
 bool Rooms_Tree::contains(int roomNum) const {
     return roomsTree.contains(roomNum);
 }
-
-AVLtree<Rooms_Val>::node* Rooms_Tree::findMin() const {
-    //not in use
-    if (roomsTree.root == nullptr) {
-        return nullptr;
-    }
-    AVLtree<Rooms_Val>::node* current = roomsTree.root;
-    while (current != nullptr) {
-        current = current->leftSon;
-    }
-    return current;
-}

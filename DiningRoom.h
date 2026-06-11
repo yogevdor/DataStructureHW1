@@ -1,8 +1,7 @@
-#ifndef DININGROOM_TREE_H
-#define DININGROOM_TREE_H
+#pragma once
 #include "AVLtree.h"
 #include "wet1util.h"
-#pragma once
+
 class Guests_Tree;
 struct Guest_Val;
 
@@ -49,5 +48,3 @@ public:
 
     bool contains(int tableId);
 };
-
-#endif //DININGROOM_TREE_H

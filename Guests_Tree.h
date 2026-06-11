@@ -1,8 +1,7 @@
-#ifndef GUESTS_TREE_H
-#define GUESTS_TREE_H
+#pragma once
 #include "AVLtree.h"
 #include "wet1util.h"
-#pragma once
+
 struct Dining_Room_Val;
 class DiningRoom;
 
@@ -18,7 +17,6 @@ class Guests_Tree {
 
 private:
     AVLtree<Guest_Val*> guestsTree;
-
 
     void clearGuestsMemory(AVLtree<Guest_Val*>::node* current);
 
@@ -41,5 +39,3 @@ public:
 
     AVLtree<Guest_Val*>::node* find(int guestId) const;
 };
-
-#endif //GUESTS_TREE_H
