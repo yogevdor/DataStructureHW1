@@ -124,7 +124,7 @@ StatusType DiningRoom::joinTables(int tableId1, int tableId2) {
     try {
         AVLtree<Guest_Val*>* merged_tables = AVLtree<Guest_Val*>::mergeTrees
                 (&table_1Ptr->value->guestsTree, &table_2Ptr->value->guestsTree);
-        updateTablePointer(table_2Ptr->value->guestsTree.root, table_1Ptr->value);
+        updateTablePointer(merged_tables->root, table_1Ptr->value);
         table_1Ptr->value->guestsTree.root = nullptr;
         table_1Ptr->value->guestsTree.num_node = 0;
         table_2Ptr->value->guestsTree.root = nullptr;
