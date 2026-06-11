@@ -18,7 +18,7 @@ class Guests_Tree {
 
 private:
     AVLtree<Guest_Val*> guestsTree;
-    AVLtree<int> roomsTree;
+
 
     void clearGuestsMemory(AVLtree<Guest_Val*>::node* current);
 
@@ -27,9 +27,9 @@ public:
 
     ~Guests_Tree();
 
-    Guests_Tree(const Guests_Tree &) = delete; // חוסם בנאי העתקה
+    Guests_Tree(const Guests_Tree &) = delete;
 
-    Guests_Tree &operator=(const Guests_Tree &) = delete; // חוסם אופרטור השמה
+    Guests_Tree &operator=(const Guests_Tree &) = delete;
 
     void insert(int guestId, int roomNum);
 
@@ -40,8 +40,6 @@ public:
     bool contains(int guestId) const;
 
     AVLtree<Guest_Val*>::node* find(int guestId) const;
-
-    //StatusType enterDiningRoom(int guestId, int tableId, DiningRoom& dining_room);
 };
 
 #endif //GUESTS_TREE_H

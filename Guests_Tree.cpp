@@ -21,7 +21,12 @@ void Guests_Tree::insert(int guestId, int roomNum) {
     newGuest->roomNum = roomNum;
     newGuest->lastMeal = 0;
     newGuest->diningTable = nullptr;
-    this->guestsTree.insert(guestId, newGuest);
+    try {
+        this->guestsTree.insert(guestId, newGuest);
+    } catch (const std::exception &e) {
+        delete newGuest;
+        throw e;
+    }
 }
 
 void Guests_Tree::remove(int guestId) {

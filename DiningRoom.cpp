@@ -18,6 +18,7 @@ StatusType DiningRoom::addTable(int tableId, int capacity) {
     try {
         tablesTree.insert(tableId, val);
     } catch (const std::exception &e) {
+        delete val;
         return StatusType::ALLOCATION_ERROR;
     }
     return StatusType::SUCCESS;
@@ -121,14 +122,15 @@ StatusType DiningRoom::joinTables(int tableId1, int tableId2) {
 
     int newCapacity = table_1Ptr->value->capacity + table_2Ptr->value->capacity;
     try {
-        updateTablePointer(table_2Ptr->value->guestsTree.root, table_1Ptr->value);
         AVLtree<Guest_Val*>* merged_tables = AVLtree<Guest_Val*>::mergeTrees
                 (&table_1Ptr->value->guestsTree, &table_2Ptr->value->guestsTree);
+        updateTablePointer(table_2Ptr->value->guestsTree.root, table_1Ptr->value);
         table_1Ptr->value->guestsTree.root = nullptr;
         table_1Ptr->value->guestsTree.num_node = 0;
         table_2Ptr->value->guestsTree.root = nullptr;
         table_2Ptr->value->guestsTree.num_node = 0;
         table_1Ptr->value->guestsTree.takeOwnership(merged_tables);
+        delete merged_tables;
         table_1Ptr->value->capacity = newCapacity;
     } catch (const std::exception &e) {
         return StatusType::ALLOCATION_ERROR;

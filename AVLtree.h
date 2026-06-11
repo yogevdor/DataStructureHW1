@@ -115,6 +115,7 @@ public:
                 toRemove = toRemove->rightSon;
             }
         }
+        if (toRemove == nullptr) return;
         if (toRemove->leftSon != nullptr && toRemove->rightSon != nullptr) {
             node* successor = toRemove->rightSon;
             while (successor->leftSon != nullptr) {
